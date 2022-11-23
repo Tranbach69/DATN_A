@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DATN.Core\DATN.Core.csproj" />
+    <ProjectReference Include="..\DATN.Infastructure\DATN.Infastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DeviceHandler\Commands\CreateDevice\" />
+    <Folder Include="EthernetHandler\Queries\" />
+    <Folder Include="GpsHandler\Queries\" />
+  </ItemGroup>
+
+</Project>
