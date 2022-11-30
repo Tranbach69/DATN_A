@@ -1,5 +1,6 @@
 ﻿using DATN.Application.Lte4gHandler.Commands.CreateLte4g;
 using DATN.Application.Lte4gHandler.Commands.DeleteLte4g;
+using DATN.Application.Lte4gHandler.Commands.UpdateLte4g;
 using DATN.Application.Lte4gHandler.Queries.GetLte4g;
 using DATN.Application.Lte4gHandler.Queries.GetLte4gPaging;
 using MediatR;
@@ -27,12 +28,12 @@ namespace DATN.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpPut("changepass")]
+		[HttpPut]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> ChangePassword([FromBody] CreateLte4gCommand command)
+		public async Task<ActionResult<bool>> ChangePassword([FromBody] UpdateLte4gCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return result.Succeeded ? Ok(result) : BadRequest(result);
+			return Ok(result);
 		}
 
 		[HttpGet("{id:int}")]
@@ -59,6 +60,13 @@ namespace DATN.Api.Controllers
 		{
 			var query = new DeleteLte4gCommand(id);
 			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpPatch]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateLte4gPatchCommand command)
+		{
+			var result = await _mediator.Send(command);
 			return Ok(result);
 		}
 	}

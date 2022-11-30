@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DATN.Api.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/account/admin")]
 	[ApiController]
 	public class AccountAdminController : ControllerBase
 	{

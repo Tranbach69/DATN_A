@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DATN.Api.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/auth/admin")]
 	[ApiController]
     public class AdminAuthController : ControllerBase
     {

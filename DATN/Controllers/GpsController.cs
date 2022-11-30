@@ -1,5 +1,6 @@
 ﻿using DATN.Application.GpsHandler.Commands.CreateGps;
 using DATN.Application.GpsHandler.Commands.DeleteGps;
+using DATN.Application.GpsHandler.Commands.UpdateGps;
 using DATN.Application.GpsHandler.Queries.GetGps;
 using DATN.Application.GpsHandler.Queries.GetGpsPaging;
 using MediatR;
@@ -27,12 +28,12 @@ namespace DATN.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpPut("changepass")]
+		[HttpPut]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> ChangePassword([FromBody] CreateGpsCommand command)
+		public async Task<ActionResult<bool>> ChangePassword([FromBody] UpdateGpsCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return result.Succeeded ? Ok(result) : BadRequest(result);
+			return Ok(result);
 		}
 
 		[HttpGet("{id:int}")]
@@ -59,6 +60,13 @@ namespace DATN.Api.Controllers
 		{
 			var query = new DeleteGpsCommand(id);
 			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpPatch]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateGpsPatchCommand command)
+		{
+			var result = await _mediator.Send(command);
 			return Ok(result);
 		}
 	}

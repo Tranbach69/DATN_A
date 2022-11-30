@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DATN.Api.Controllers
 {
-	[Route("api/Device")]
+	[Route("api/device")]
 	[ApiController]
 	public class DeviceController : ControllerBase
 	{
@@ -29,7 +29,7 @@ namespace DATN.Api.Controllers
 			var result = await _mediator.Send(command);
 			return Ok(result);
 		}
-		[HttpPut("pass")]
+		[HttpPut("chagne/pass")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> Update([FromBody] UpdateDevicePasswordCommand command)
 		{
@@ -76,6 +76,13 @@ namespace DATN.Api.Controllers
 		{
 			var query = new DeleteDeviceCommand(id);
 			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpPatch]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateDevicePatchCommand command)
+		{
+			var result = await _mediator.Send(command);
 			return Ok(result);
 		}
 	}

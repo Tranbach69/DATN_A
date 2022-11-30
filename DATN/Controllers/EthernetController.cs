@@ -1,5 +1,6 @@
 ﻿using DATN.Application.EthernetHandler.Commands.CreateEthernet;
 using DATN.Application.EthernetHandler.Commands.DeleteEthernet;
+using DATN.Application.EthernetHandler.Commands.UpdateEthernet;
 using DATN.Application.EthernetHandler.Queries.GetEthernet;
 using DATN.Application.EthernetHandler.Queries.GetEthernetPaging;
 using MediatR;
@@ -27,12 +28,19 @@ namespace DATN.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpPut("changepass")]
+		[HttpPut]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> ChangePassword([FromBody] CreateEthernetCommand command)
+		public async Task<ActionResult<bool>> Update([FromBody] UpdateEthernetCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return result.Succeeded ? Ok(result) : BadRequest(result);
+			return Ok(result);
+		}
+		[HttpPatch]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateEthernetPatchCommand command)
+		{
+			var result = await _mediator.Send(command);
+			return Ok(result);
 		}
 
 		[HttpGet("{id:int}")]
