@@ -1,4 +1,5 @@
 ﻿using DATN.Core.Common;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace DATN.Infastructure.Repositories.BaseRepository
 
         #region update
         Task BUpdateAsync(T entity);
-        Task BUpdateByIdAsync(int id);
+        Task BUpdateTPatchAsync(int id, JsonPatchDocument TModel);
         #endregion
 
         #region get

@@ -39,7 +39,7 @@ namespace DATN
 
 			// Register the MediatR request handlers
 			services.AddCors();
-			services.AddControllers();
+			services.AddControllers().AddNewtonsoftJson();
 			services.RegisterRepositories();
 			services.RegisterRequestHandlers();
 			//services.AddDbContext<ApplicationDbContext>(option =>

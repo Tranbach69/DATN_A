@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using DATN.Infastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace DATN.Infastructure.Repositories.BaseRepository
 {
@@ -64,10 +65,17 @@ namespace DATN.Infastructure.Repositories.BaseRepository
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
-        public async Task BUpdateByIdAsync(int id)
-        {
-            //var entity.TimingUpdate = System.DateTime.Now;
-            //entity.IsDeleted = false;
+
+		public async Task BUpdateTPatchAsync(int id, JsonPatchDocument TModel)
+		{
+            var entity = await _context.Set<T>().FindAsync(id);
+            
+            entity.IsDeleted = false;
+            if (entity != null)
+            {
+                TModel.ApplyTo(entity);
+                await _context.SaveChangesAsync();
+            }
             //_context.Entry(entity).State = EntityState.Modified;
             //await _context.SaveChangesAsync();
         }

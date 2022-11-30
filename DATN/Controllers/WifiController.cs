@@ -1,6 +1,7 @@
 ﻿
 using DATN.Application.WifiHandler.Commands.CreateWifi;
 using DATN.Application.WifiHandler.Commands.DeleteWifi;
+using DATN.Application.WifiHandler.Commands.UpdateWifi;
 using DATN.Application.WifiHandler.Queries.GetWifi;
 using DATN.Application.WifiHandler.Queries.GetWifiPaging;
 using MediatR;
@@ -28,12 +29,19 @@ namespace DATN.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpPut("changepass")]
+		[HttpPut]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> ChangePassword([FromBody] CreateWifiCommand command)
+		public async Task<ActionResult<bool>> Update([FromBody] UpdateWifiCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return result.Succeeded ? Ok(result) : BadRequest(result);
+			return Ok(result);
+		}	
+		[HttpPatch]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateWifiPatchCommand command)
+		{
+			var result = await _mediator.Send(command);
+			return Ok(result);
 		}
 
 		[HttpGet("{id:int}")]
