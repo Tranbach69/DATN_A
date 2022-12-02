@@ -16,12 +16,13 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
     public class UpdateEthernetCommand : IRequest<BResult>
     {
         public int Id { get; set; }
-        public string MacAddress { get; set; }
-        public int EthernetOfDeviceId { get; set; }
+        public string Imei { get; set; }
         public string DriverType { get; set; }
-        public string LanCtrl { get; set; }
-        public string LanMode { get; set; }
-        public string EthernetIp { get; set; }
+        public string BringUpdownEn { get; set; }
+        public string IpStaticEn { get; set; }
+        public string IpAddr { get; set; }
+        public string DriverEn { get; set; }
+        public string Netmask { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime TimingCreate { get; set; }
         public DateTime TimingUpdate { get; set; }

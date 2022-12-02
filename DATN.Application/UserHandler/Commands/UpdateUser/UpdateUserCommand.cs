@@ -15,14 +15,13 @@ namespace DATN.Application.UserHandler.Commands.UpdateUser
 {
     public class UpdateUserCommand : IRequest<BResult>
     {
-        public string MacAddress { get; set; }
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public string Name { get; set; }
         public int Age { get; set; }
-        public string Address { get; set; }
         public string Phone { get; set; }
-        
+        public string Imei { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime TimingCreate { get; set; }
         public DateTime TimingUpdate { get; set; }

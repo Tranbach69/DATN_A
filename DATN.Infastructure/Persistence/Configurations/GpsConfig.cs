@@ -14,9 +14,9 @@ namespace DATN.Infastructure.Persistence.Configurations
         {
             modelBuilder.Entity<Gps>(e => {
                 e.ToTable("Gps");
-                e.HasOne<Device>(sc => sc.Device)
-                    .WithOne(s => s.Gps)
-                    .HasForeignKey<Gps>(s => s.GpsOfDeviceId);
+                //e.HasOne<Device>(sc => sc.Device)
+                //    .WithOne(s => s.Gps)
+                //    .HasForeignKey<Gps>(s => s.GpsOfDeviceId);
 
             });
 

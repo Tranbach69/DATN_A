@@ -14,9 +14,9 @@ namespace DATN.Infastructure.Persistence.Configurations
         {
             modelBuilder.Entity<Wifi>(e => {
                 e.ToTable("Wifi");
-                e.HasOne<Device>(sc => sc.Device)
-                     .WithOne(s => s.Wifi)
-                     .HasForeignKey<Wifi>(s => s.WifiOfDeviceId);
+                //e.HasOne<Device>(sc => sc.Device)
+                //     .WithOne(s => s.Wifi)
+                //     .HasForeignKey<Wifi>(s => s.WifiOfDeviceId);
 
 
                 e.Property(e => e.Ssid).HasMaxLength(50);})

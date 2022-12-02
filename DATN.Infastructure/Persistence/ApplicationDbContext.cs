@@ -24,7 +24,8 @@ namespace DATN.Infastructure.Persistence
 			modelBuilder.Lte4gConfigTable();
 			modelBuilder.GpsConfigTable();
 			modelBuilder.DeviceConfigTable();
-			modelBuilder.AccountAdminConfigTable();
+			modelBuilder.AccountConfigTable();
+			modelBuilder.StationWifiConfigTable();
 
 			//modelBuilder.SeedInitial();
 		}
@@ -37,8 +38,9 @@ namespace DATN.Infastructure.Persistence
 		public DbSet<Lte4g> Lte4gs => Set<Lte4g>();
 		public DbSet<Gps> Gpss => Set<Gps>();
 		
-		public DbSet<AccountAdmin> AccountAdmins => Set<AccountAdmin>();
+		public DbSet<Account> Accounts => Set<Account>();
+		public DbSet<StationWifi> StationWifis => Set<StationWifi>();
 
-		public object Device { get; internal set; }
+		//public object Device { get; internal set; }
 	}
 }

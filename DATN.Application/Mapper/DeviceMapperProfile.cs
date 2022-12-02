@@ -17,12 +17,10 @@ namespace DATN.Application.Mapper
     {
         public DeviceMapperProfile()
         {
-            CreateMap<Device, CreateDeviceCommand>().ReverseMap();
-            CreateMap<Device, UpdateDevicePasswordCommand>().ReverseMap();
+            CreateMap<Device, CreateDeviceCommand>().ReverseMap();           
             CreateMap<Device, UpdateDeviceCommand>().ReverseMap();
             CreateMap<Device, GetDeviceResponse>().ReverseMap();
             CreateMap<Device, GetDevicePagingResponse>().ReverseMap();
-            //CreateMap<Device, GetAllDeviceUserPagingResponse>().ReverseMap();
         }
     }
 }

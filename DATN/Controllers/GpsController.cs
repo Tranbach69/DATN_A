@@ -45,7 +45,6 @@ namespace DATN.Api.Controllers
 			return Ok(result);
 		}
 
-
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> Get([FromQuery] GetGpsPagingQuery queries)

@@ -1,6 +1,5 @@
 ﻿
 using DATN.Application.Models;
-using DATN.Infastructure.Repositories.DeviceRepository;
 using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DATN.Infastructure.Repositories.AccountRepository;
 
 namespace DATN.Application.AuthHandler.Commands.TokenCommand
 {
@@ -29,18 +29,18 @@ namespace DATN.Application.AuthHandler.Commands.TokenCommand
     public class TokenCommandHandler : IRequestHandler<TokenCommand, TokenCommandResponse>
     {
         private readonly IConfiguration _config;
-        private readonly IDeviceRepository _deviceRepo;
+        private readonly IAccountRepository _accountRepo;
 
-        public TokenCommandHandler(IConfiguration config, IDeviceRepository deviceRepo)
+        public TokenCommandHandler(IConfiguration config, IAccountRepository accountRepo)
         {
             _config = config;
-            _deviceRepo = deviceRepo;
+            _accountRepo = accountRepo;
         }
 
         public async Task<TokenCommandResponse> Handle(TokenCommand request, CancellationToken cancellationToken)
         {
             // Verificamos credenciales con Identity
-            var user = await _deviceRepo.CheckAuth(request.UserName, request.Password);
+            var user = await _accountRepo.CheckAuth(request.UserName, request.Password);
             
             if (user is null)
             {

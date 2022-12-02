@@ -29,13 +29,6 @@ namespace DATN.Api.Controllers
 			var result = await _mediator.Send(command);
 			return Ok(result);
 		}
-		[HttpPut("chagne/pass")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Update([FromBody] UpdateDevicePasswordCommand command)
-		{
-			var result = await _mediator.Send(command);
-			return result.Succeeded ? Ok(result) : BadRequest(result);
-		}
 
 		[HttpPut]
 		[ProducesResponseType(StatusCodes.Status200OK)]

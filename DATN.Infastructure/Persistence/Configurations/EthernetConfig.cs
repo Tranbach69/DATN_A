@@ -14,9 +14,9 @@ namespace DATN.Infastructure.Persistence.Configurations
         {
             modelBuilder.Entity<Ethernet>(e => {
                 e.ToTable("Ethernet");
-                e.HasOne<Device>(sc => sc.Device)
-                    .WithOne(s => s.Ethernet)
-                    .HasForeignKey<Ethernet>(s => s.EthernetOfDeviceId);
+                //e.HasOne<Device>(sc => sc.Device)
+                //    .WithOne(s => s.Ethernet)
+                //    .HasForeignKey<Ethernet>(s => s.EthernetOfDeviceId);
             });
 
         }

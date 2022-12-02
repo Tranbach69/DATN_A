@@ -27,7 +27,6 @@ namespace DATN.Infastructure.Repositories.DeviceRepository
 	//	public int EthernetId { get; set; }
 	//	public int Lte4gId { get; set; }
 	//	public int GpsId { get; set; }
-
 	//	// user
 	//	public string NameOfUser { get; set; }
 	//	public int Age { get; set; }
@@ -44,17 +43,17 @@ namespace DATN.Infastructure.Repositories.DeviceRepository
 		public DeviceRepository(ApplicationDbContext context) : base(context)
 		{
 		}
-		public async Task<Device> CheckAuth(string userName, string password)
-		{
-			var device = await BFistOrDefaultAsync(acc => acc.UserName.Equals(userName) && acc.Password.Equals(password));
-			return device;
-		}
-		public async Task ChangePassword(int id, string oldPassword, string newPassword)
-		{
-			var device = await BFistOrDefaultAsync(acc => acc.Id == id && acc.Password == oldPassword);
-			device.Password = newPassword;
-			await BUpdateAsync(device);
-		}
+		//public async Task<Device> CheckAuth(string userName, string password)
+		//{
+		//	var device = await BFistOrDefaultAsync(acc => acc.UserName.Equals(userName) && acc.Password.Equals(password));
+		//	return device;
+		//}
+		//public async Task ChangePassword(int id, string oldPassword, string newPassword)
+		//{
+		//	var device = await BFistOrDefaultAsync(acc => acc.Id == id && acc.Password == oldPassword);
+		//	device.Password = newPassword;
+		//	await BUpdateAsync(device);
+		//}
 
 		//public async Task<List<DeviceUserQuery>> GetAllDeviceWithUserInfo()
 		//{

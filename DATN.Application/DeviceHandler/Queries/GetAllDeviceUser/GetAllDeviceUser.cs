@@ -20,26 +20,19 @@ namespace DATN.Application.DeviceHandler.Queries.GetAllDeviceUser
 	public class GetDevicesWithUserInfoResponse
 	{
 		//device
+		public string Imei { get; set; }
 		public string DeviceName { get; set; }
-		public string ProductCode { get; set; }
-		public string MacAddress { get; set; }
 		public float Price { get; set; }
 		public string EquipmentShop { get; set; }
-		public DateTime PurchaseDate { get; set; }
-		public DateTime WarrantyPeriod { get; set; }
-		public string UserName { get; set; }
-		public string Password { get; set; }
-		public int UserId { get; set; }
-		public int WifiId { get; set; }
-		public int EthernetId { get; set; }
-		public int Lte4gId { get; set; }
-		public int GpsId { get; set; }
+		public string PurchaseDate { get; set; }
+		public string WarrantyPeriod { get; set; }
 
 		// user
-		public string NameOfUser { get; set; }
 		public int Age { get; set; }
-		public string Address { get; set; }
 		public string Phone { get; set; }
+		public string NameOfUser { get; set; }
+		public string Address { get; set; }
+		public string Email { get; set; }
 	}
 
 	public class GetDevicesWithUserInfoQueryHandler : IRequestHandler<GetDevicesWithUserInfoQuery, List<GetDevicesWithUserInfoResponse>>
@@ -59,28 +52,22 @@ namespace DATN.Application.DeviceHandler.Queries.GetAllDeviceUser
 			var devices = await _deviceRepository.BGetAllAsync();
 			var users = await _userRepository.BGetAllAsync();
 			var devicesWithUser = from user in users
-								  join device in devices on user.Id equals device.UserId
+								  join device in devices on user.Imei equals device.Imei
 								  select new GetDevicesWithUserInfoResponse
 								  {
 									  DeviceName = device.Name,
-									  ProductCode = device.MacAddress,
+									  Imei = device.Imei,
 									  Price = device.Price,
 									  EquipmentShop = device.EquipmentShop,
 									  PurchaseDate = device.PurchaseDate,
-									  WarrantyPeriod = device.WarrantyPeriod,
-									  UserName = device.UserName,
-									  Password = device.Password,
-									  UserId = device.UserId,
-									  WifiId = device.WifiId,
-									  EthernetId = device.EthernetId,
-									  Lte4gId = device.Lte4gId,
-									  GpsId = device.GpsId,
+									  WarrantyPeriod = device.WarrantyPeriod,				
 
 									  // user
 									  NameOfUser = user.Name,
 									  Age = user.Age,
 									  Address = user.Address,
-									  Phone = user.Phone
+									  Phone = user.Phone,
+									  Email= user.Email,
 								  };
 			return devicesWithUser.ToList();
 			//var deviceUserList = await _deviceRepository.GetAllDeviceWithUserInfo();

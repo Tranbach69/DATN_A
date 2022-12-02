@@ -14,9 +14,9 @@ namespace DATN.Infastructure.Persistence.Configurations
         {
             modelBuilder.Entity<Lte4g>(e => {
                 e.ToTable("Lte4g");
-                e.HasOne<Device>(sc => sc.Device)
-                      .WithOne(s => s.Lte4g)
-                      .HasForeignKey<Lte4g>(s => s.Lte4gOfDeviceId);
+                //e.HasOne<Device>(sc => sc.Device)
+                //      .WithOne(s => s.Lte4g)
+                //      .HasForeignKey<Lte4g>(s => s.Lte4gOfDeviceId);
 
 
             });
