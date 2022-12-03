@@ -20,6 +20,7 @@ namespace DATN.Application.AuthHandler.Commands.TokenCommand
         public string AccessToken { get; set; } = default!;
         public int AccountId { get; set; } = default!;
         public int Role { get; set; } = default!;
+        public string Imei { get; set; } = default!;
 
     }
     public class TokenCommand : IRequest<TokenCommandResponse>
@@ -76,7 +77,8 @@ namespace DATN.Application.AuthHandler.Commands.TokenCommand
             {
                 AccessToken = jwt,
                 AccountId = account.Id,
-                Role = account.Role
+                Role = account.Role,
+                Imei=account.Imei,
             };
         }
     }

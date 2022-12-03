@@ -21,7 +21,7 @@ namespace DATN.Application.Mapper
             CreateMap<Lte4g, UpdateLte4gCommand>().ReverseMap();
             CreateMap<Lte4g, GetLte4gResponse>().ReverseMap();
             CreateMap<Lte4g, GetLte4gPagingResponse>().ReverseMap();
-            CreateMap<Account, GetLte4gByImeiResponse>().ReverseMap();
+            CreateMap<Lte4g, GetLte4gByImeiResponse>().ReverseMap();
         }
     }
 }

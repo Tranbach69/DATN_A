@@ -21,7 +21,7 @@ namespace DATN.Application.Mapper
             CreateMap<User, UpdateUserCommand>().ReverseMap();
             CreateMap<User, GetUserResponse>().ReverseMap();
             CreateMap<User, GetUserPagingResponse>().ReverseMap();
-            CreateMap<Account, GetUserByImeiResponse>().ReverseMap();
+            CreateMap<User, GetUserByImeiResponse>().ReverseMap();
         }
     }
 }

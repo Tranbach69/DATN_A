@@ -21,7 +21,7 @@ namespace DATN.Application.Mapper
 			CreateMap<Gps, UpdateGpsCommand>().ReverseMap();
 			CreateMap<Gps, GetGpsResponse>().ReverseMap();
             CreateMap<Gps, GetGpsPagingResponse>().ReverseMap();
-            CreateMap<Account, GetGpsByImeiResponse>().ReverseMap();
+            CreateMap<Gps, GetGpsByImeiResponse>().ReverseMap();
         }
     }
 }

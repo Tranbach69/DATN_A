@@ -21,7 +21,7 @@ namespace DATN.Application.Mapper
 			CreateMap<Ethernet, UpdateEthernetCommand>().ReverseMap();
 			CreateMap<Ethernet, GetEthernetResponse>().ReverseMap();
             CreateMap<Ethernet, GetEthernetPagingResponse>().ReverseMap();
-            CreateMap<Account, GetEthernetByImeiResponse>().ReverseMap();
+            CreateMap<Ethernet, GetEthernetByImeiResponse>().ReverseMap();
         }
     }
 }

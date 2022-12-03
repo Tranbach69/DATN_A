@@ -22,7 +22,7 @@ namespace DATN.Application.Mapper
             CreateMap<Device, UpdateDeviceCommand>().ReverseMap();
             CreateMap<Device, GetDeviceResponse>().ReverseMap();
             CreateMap<Device, GetDevicePagingResponse>().ReverseMap();
-            CreateMap<Account, GetDeviceByImeiResponse>().ReverseMap();
+            CreateMap<Device, GetDeviceByImeiResponse>().ReverseMap();
         }
     }
 }

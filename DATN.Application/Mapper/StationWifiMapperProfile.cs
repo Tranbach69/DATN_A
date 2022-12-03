@@ -21,7 +21,7 @@ namespace DATN.Application.Mapper
             CreateMap<StationWifi, UpdateStationWifiCommand>().ReverseMap();
             CreateMap<StationWifi, GetStationWifiResponse>().ReverseMap();
             CreateMap<StationWifi, GetStationWifiPagingResponse>().ReverseMap();
-            CreateMap<Account, GetStationWifiByImeiResponse>().ReverseMap();
+            CreateMap<StationWifi, GetStationWifiByImeiResponse>().ReverseMap();
         }
     }
 }
