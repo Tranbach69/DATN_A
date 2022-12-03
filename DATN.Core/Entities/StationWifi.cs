@@ -9,7 +9,6 @@ namespace DATN.Core.Entities
 {
 	public class StationWifi : Base
 	{
-		public string Imei { get; set; }
 		public string StaIp { get; set; }
 		public string StaSsidExt { get; set; }
 		public string StaSecurity { get; set; }

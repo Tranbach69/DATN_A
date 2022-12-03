@@ -130,6 +130,16 @@ namespace DATN.Infastructure.Repositories.BaseRepository
             }
             return entity;
         }
+        public async Task<T> BGetByImeiAsync(string imei)
+        {
+            var entity = await _context.Set<T>().FirstOrDefaultAsync(t => t.Imei.Equals(imei));
+            _context.Entry(entity).State = EntityState.Detached;
+            if (entity?.IsDeleted == true)
+            {
+                return null;
+            }
+            return entity;
+        }
         #endregion
     }
 }

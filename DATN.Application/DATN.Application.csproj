@@ -18,8 +18,6 @@
 
   <ItemGroup>
     <Folder Include="DeviceHandler\Commands\CreateDevice\" />
-    <Folder Include="EthernetHandler\Queries\" />
-    <Folder Include="GpsHandler\Queries\" />
   </ItemGroup>
 
 </Project>

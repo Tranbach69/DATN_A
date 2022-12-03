@@ -34,6 +34,7 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         Task<IReadOnlyList<T>> BGetAsync(Func<T, bool> predicate);
         Task<int> BGetTotalAsync();
         Task<T> BGetByIdAsync(int id);
+        Task<T> BGetByImeiAsync(string imei);
         #endregion
 
     }

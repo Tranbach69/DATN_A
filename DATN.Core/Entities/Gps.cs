@@ -9,7 +9,6 @@ namespace DATN.Core.Entities
 {
 	public class Gps : Base
 	{
-		public string Imei { get; set; }
 		public string Latitude { get; set; }
 		public string Longitude { get; set; }
 		public string Altitude { get; set; }

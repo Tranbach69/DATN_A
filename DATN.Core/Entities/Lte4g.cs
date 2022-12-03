@@ -9,7 +9,6 @@ namespace DATN.Core.Entities
 {
 	public class Lte4g : Base
 	{
-		public string Imei { get; set; }
 		public string SimStatus { get; set; }
 		public string SimIccid { get; set; }
 		public string SimImsi { get; set; }

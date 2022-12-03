@@ -2,6 +2,7 @@
 using DATN.Application.UserHandler.Commands.DeleteUser;
 using DATN.Application.UserHandler.Commands.UpdateUser;
 using DATN.Application.UserHandler.Queries.GetUser;
+using DATN.Application.UserHandler.Queries.GetUserByImei;
 using DATN.Application.UserHandler.Queries.GetUserPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -41,6 +42,14 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get(int id)
 		{
 			var query = new GetUserQuery(id);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpGet("/api/user/imei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> Get(string imei)
+		{
+			var query = new GetUserByImeiQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}

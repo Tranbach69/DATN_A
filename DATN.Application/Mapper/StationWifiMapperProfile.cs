@@ -2,6 +2,7 @@
 using DATN.Application.StationWifiHandler.Commands.CreateStationWifi;
 using DATN.Application.StationWifiHandler.Commands.UpdateStationWifi;
 using DATN.Application.StationWifiHandler.Queries.GetStationWifi;
+using DATN.Application.StationWifiHandler.Queries.GetStationWifiByImei;
 using DATN.Application.StationWifiHandler.Queries.GetStationWifiPaging;
 using DATN.Core.Entities;
 using System;
@@ -20,6 +21,7 @@ namespace DATN.Application.Mapper
             CreateMap<StationWifi, UpdateStationWifiCommand>().ReverseMap();
             CreateMap<StationWifi, GetStationWifiResponse>().ReverseMap();
             CreateMap<StationWifi, GetStationWifiPagingResponse>().ReverseMap();
+            CreateMap<Account, GetStationWifiByImeiResponse>().ReverseMap();
         }
     }
 }

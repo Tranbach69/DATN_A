@@ -4,6 +4,7 @@ using DATN.Application.DeviceHandler.Commands.UpdateDevice;
 using DATN.Application.DeviceHandler.Queries.GetAllDeviceUser;
 
 using DATN.Application.DeviceHandler.Queries.GetDevice;
+using DATN.Application.DeviceHandler.Queries.GetDeviceByImei;
 using DATN.Application.DeviceHandler.Queries.GetDevicePaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -50,6 +51,14 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get(int id)
 		{
 			var query = new GetDeviceQuery(id);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpGet("/api/device/imei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> Get(string imei)
+		{
+			var query = new GetDeviceByImeiQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}

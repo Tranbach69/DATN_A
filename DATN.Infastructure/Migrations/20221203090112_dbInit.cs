@@ -14,10 +14,10 @@ namespace DATN.Infastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
                     Role = table.Column<int>(type: "integer", nullable: false),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -34,12 +34,12 @@ namespace DATN.Infastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
                     EquipmentShop = table.Column<string>(type: "text", nullable: true),
                     PurchaseDate = table.Column<string>(type: "text", nullable: true),
                     WarrantyPeriod = table.Column<string>(type: "text", nullable: true),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -56,13 +56,13 @@ namespace DATN.Infastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     DriverType = table.Column<string>(type: "text", nullable: true),
                     BringUpdownEn = table.Column<string>(type: "text", nullable: true),
                     IpStaticEn = table.Column<string>(type: "text", nullable: true),
                     IpAddr = table.Column<string>(type: "text", nullable: true),
                     DriverEn = table.Column<string>(type: "text", nullable: true),
                     Netmask = table.Column<string>(type: "text", nullable: true),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -79,7 +79,6 @@ namespace DATN.Infastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<string>(type: "text", nullable: true),
                     Longitude = table.Column<string>(type: "text", nullable: true),
                     Altitude = table.Column<string>(type: "text", nullable: true),
@@ -87,6 +86,7 @@ namespace DATN.Infastructure.Migrations
                     Bearing = table.Column<string>(type: "text", nullable: true),
                     Accuracy = table.Column<string>(type: "text", nullable: true),
                     Time = table.Column<string>(type: "text", nullable: true),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -103,7 +103,6 @@ namespace DATN.Infastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     SimStatus = table.Column<string>(type: "text", nullable: true),
                     SimIccid = table.Column<string>(type: "text", nullable: true),
                     SimImsi = table.Column<string>(type: "text", nullable: true),
@@ -118,6 +117,7 @@ namespace DATN.Infastructure.Migrations
                     Afrcn = table.Column<string>(type: "text", nullable: true),
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
                     Rssi4G = table.Column<string>(type: "text", nullable: true),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -134,12 +134,12 @@ namespace DATN.Infastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     StaIp = table.Column<string>(type: "text", nullable: true),
                     StaSsidExt = table.Column<string>(type: "text", nullable: true),
                     StaSecurity = table.Column<string>(type: "text", nullable: true),
                     StaProtocol = table.Column<string>(type: "text", nullable: true),
                     StaPassword = table.Column<int>(type: "integer", nullable: false),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -158,10 +158,10 @@ namespace DATN.Infastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Age = table.Column<int>(type: "integer", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: true),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: true),
                     Address = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -179,7 +179,6 @@ namespace DATN.Infastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ClientCount = table.Column<int>(type: "integer", nullable: false),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     WifiOpen = table.Column<string>(type: "text", nullable: true),
                     WifiMode = table.Column<string>(type: "text", nullable: true),
                     CurrentAp = table.Column<string>(type: "text", nullable: true),
@@ -197,6 +196,7 @@ namespace DATN.Infastructure.Migrations
                     DhcpStartIp = table.Column<string>(type: "text", nullable: true),
                     DhcpEndIp = table.Column<string>(type: "text", nullable: true),
                     DhcpTime = table.Column<string>(type: "text", nullable: true),
+                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),

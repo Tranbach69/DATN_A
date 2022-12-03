@@ -9,8 +9,6 @@ namespace DATN.Core.Entities
 {
 	public class Device: Base
 	{
-
-		public string Imei { get; set; }
 		public string Name { get; set; }
 		public float Price { get; set; }
 		public string EquipmentShop { get; set; }

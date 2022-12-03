@@ -2,6 +2,7 @@
 using DATN.Application.AccountHandler.Commands.DeleteAccount;
 using DATN.Application.AccountHandler.Commands.UpdateAccount;
 using DATN.Application.AccountHandler.Queries.GetAccount;
+using DATN.Application.AccountHandler.Queries.GetAccountByImei;
 using DATN.Application.AccountHandler.Queries.GetAccountPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -62,6 +63,15 @@ namespace DATN.Api.Controllers
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}
+		[HttpGet("/api/account/imei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> Get(string imei)
+		{
+			var query = new GetAccountByImeiQuery(imei);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+
 		[HttpPatch]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateAccountPatchCommand command)
