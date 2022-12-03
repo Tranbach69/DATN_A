@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DATN.Infastructure.Migrations
 {
-    public partial class date0212 : Migration
+    public partial class dbInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace DATN.Infastructure.Migrations
                     Imei = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "text", nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
-                    Permission = table.Column<string>(type: "text", nullable: true),
+                    Role = table.Column<int>(type: "integer", nullable: false),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),

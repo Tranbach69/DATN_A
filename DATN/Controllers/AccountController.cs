@@ -62,5 +62,12 @@ namespace DATN.Api.Controllers
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}
+		[HttpPatch]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateAccountPatchCommand command)
+		{
+			var result = await _mediator.Send(command);
+			return Ok(result);
+		}
 	}
 }

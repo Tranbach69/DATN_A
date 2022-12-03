@@ -35,8 +35,8 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
-                    b.Property<string>("Permission")
-                        .HasColumnType("text");
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("TimingCreate")
                         .HasColumnType("timestamp without time zone");

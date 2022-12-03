@@ -18,7 +18,8 @@ namespace DATN.Application.AuthHandler.Commands.TokenCommand
     public class TokenCommandResponse
     {
         public string AccessToken { get; set; } = default!;
-        public int DeviceId { get; set; } = default!;
+        public int AccountId { get; set; } = default!;
+        public int Role { get; set; } = default!;
 
     }
     public class TokenCommand : IRequest<TokenCommandResponse>
@@ -40,9 +41,9 @@ namespace DATN.Application.AuthHandler.Commands.TokenCommand
         public async Task<TokenCommandResponse> Handle(TokenCommand request, CancellationToken cancellationToken)
         {
             // Verificamos credenciales con Identity
-            var user = await _accountRepo.CheckAuth(request.UserName, request.Password);
+            var account = await _accountRepo.CheckAuth(request.UserName, request.Password);
             
-            if (user is null)
+            if (account is null)
             {
                 throw new Exception();
             }
@@ -51,8 +52,8 @@ namespace DATN.Application.AuthHandler.Commands.TokenCommand
 
             // Generamos un token según los claims
             var claims = new List<Claim>{
-                new Claim(BClaimType.Id, user.Id.ToString()),
-                new Claim(BClaimType.Name, user.UserName),
+                new Claim(BClaimType.Id, account.Id.ToString()),
+                new Claim(BClaimType.Name, account.UserName),
             };
 
 			//foreach (var role in roles)
@@ -74,7 +75,8 @@ namespace DATN.Application.AuthHandler.Commands.TokenCommand
             return new TokenCommandResponse
             {
                 AccessToken = jwt,
-                DeviceId = user.Id
+                AccountId = account.Id,
+                Role = account.Role
             };
         }
     }

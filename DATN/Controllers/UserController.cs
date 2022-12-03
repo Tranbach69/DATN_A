@@ -1,5 +1,6 @@
 ﻿using DATN.Application.UserHandler.Commands.CreateUser;
 using DATN.Application.UserHandler.Commands.DeleteUser;
+using DATN.Application.UserHandler.Commands.UpdateUser;
 using DATN.Application.UserHandler.Queries.GetUser;
 using DATN.Application.UserHandler.Queries.GetUserPaging;
 using MediatR;
@@ -29,7 +30,7 @@ namespace DATN.Api.Controllers
 
 		[HttpPut("changepass")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> ChangePassword([FromBody] CreateUserCommand command)
+		public async Task<ActionResult<bool>> ChangePassword([FromBody] UpdateUserCommand command)
 		{
 			var result = await _mediator.Send(command);
 			return result.Succeeded ? Ok(result) : BadRequest(result);
@@ -59,6 +60,13 @@ namespace DATN.Api.Controllers
 		{
 			var query = new DeleteUserCommand(id);
 			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpPatch]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateUserPatchCommand command)
+		{
+			var result = await _mediator.Send(command);
 			return Ok(result);
 		}
 	}

@@ -13,6 +13,7 @@ namespace DATN.Application.AccountHandler.Commands.UpdateAccount
 {
     public class UpdateAccountCommand : IRequest<BResult>
     {
+        public int Id { get; set; }
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
     }
@@ -30,13 +31,13 @@ namespace DATN.Application.AccountHandler.Commands.UpdateAccount
 
         public async Task<BResult> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
         {
-            var currentUserIdLogged = Int32.Parse(_httpContextAccessor.HttpContext.User.FindFirst(BClaimType.Id)?.Value);
-            var user = await _accountRepository.BFistOrDefaultAsync(a => a.Id == currentUserIdLogged && a.Password == request.OldPassword);
-            if (user == null)
+            //var currentUserIdLogged = Int32.Parse(_httpContextAccessor.HttpContext.User.FindFirst(BClaimType.Id)?.Value);
+            var account = await _accountRepository.BFistOrDefaultAsync(a =>  a.Id == request.Id && a.Password == request.OldPassword);
+            if (account == null)
             {
                 return BResult.Failure("Mật khẩu cũ không chính xác");
             }
-            await _accountRepository.ChangePassword(currentUserIdLogged, request.OldPassword, request.NewPassword);
+            await _accountRepository.ChangePassword(request.Id, request.OldPassword, request.NewPassword);
             return BResult.Success();
         }
     }
