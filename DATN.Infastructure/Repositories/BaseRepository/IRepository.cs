@@ -30,11 +30,16 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         Task<T> BFistOrDefaultAsync(Func<T, bool> predicate);
         Task<T> BFistOrDefaultAsync();
         Task<IReadOnlyList<T>> BGetAllAsync();
+
         Task<IReadOnlyList<T>> BGetPagingAsync(int skip, int pageSize);
         Task<IReadOnlyList<T>> BGetAsync(Func<T, bool> predicate);
         Task<int> BGetTotalAsync();
         Task<T> BGetByIdAsync(int id);
+
+        //Bach Custom
         Task<T> BGetByImeiAsync(string imei);
+        Task<IReadOnlyList<T>> BGetMultipleImeiAsync(string imei);
+        Task<int> BGetTotalImeiAsync(string imei);
         #endregion
 
     }

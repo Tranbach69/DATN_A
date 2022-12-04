@@ -3,6 +3,7 @@ using DATN.Application.AccountHandler.Commands.DeleteAccount;
 using DATN.Application.AccountHandler.Commands.UpdateAccount;
 using DATN.Application.AccountHandler.Queries.GetAccount;
 using DATN.Application.AccountHandler.Queries.GetAccountByImei;
+using DATN.Application.AccountHandler.Queries.GetAccountByMultipleImei;
 using DATN.Application.AccountHandler.Queries.GetAccountPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -68,6 +69,15 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
 			var query = new GetAccountByImeiQuery(imei);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+
+		[HttpGet("/api/account/mutipleImei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
+		{
+			var query = new GetAccountMultipleImeiQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}

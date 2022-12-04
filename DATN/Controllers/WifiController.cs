@@ -4,6 +4,7 @@ using DATN.Application.WifiHandler.Commands.DeleteWifi;
 using DATN.Application.WifiHandler.Commands.UpdateWifi;
 using DATN.Application.WifiHandler.Queries.GetWifi;
 using DATN.Application.WifiHandler.Queries.GetWifiByImei;
+using DATN.Application.WifiHandler.Queries.GetWifiByMultipleImei;
 using DATN.Application.WifiHandler.Queries.GetWifiPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -58,6 +59,14 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
 			var query = new GetWifiByImeiQuery(imei);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpGet("/api/wifi/mutipleImei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
+		{
+			var query = new GetWifiMultipleImeiQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}

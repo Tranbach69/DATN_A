@@ -3,6 +3,7 @@ using DATN.Application.EthernetHandler.Commands.DeleteEthernet;
 using DATN.Application.EthernetHandler.Commands.UpdateEthernet;
 using DATN.Application.EthernetHandler.Queries.GetEthernet;
 using DATN.Application.EthernetHandler.Queries.GetEthernetByImei;
+using DATN.Application.EthernetHandler.Queries.GetEthernetByMultipleImei;
 using DATN.Application.EthernetHandler.Queries.GetEthernetPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -57,6 +58,15 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
 			var query = new GetEthernetByImeiQuery(imei);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+
+		[HttpGet("/api/ethernet/mutipleImei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
+		{
+			var query = new GetEthernetMultipleImeiQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}

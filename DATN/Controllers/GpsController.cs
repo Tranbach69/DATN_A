@@ -3,6 +3,7 @@ using DATN.Application.GpsHandler.Commands.DeleteGps;
 using DATN.Application.GpsHandler.Commands.UpdateGps;
 using DATN.Application.GpsHandler.Queries.GetGps;
 using DATN.Application.GpsHandler.Queries.GetGpsByImei;
+using DATN.Application.GpsHandler.Queries.GetGpsByMultipleImei;
 using DATN.Application.GpsHandler.Queries.GetGpsPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -50,6 +51,14 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
 			var query = new GetGpsByImeiQuery(imei);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpGet("/api/gps/mutipleImei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
+		{
+			var query = new GetGpsMultipleImeiQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}

@@ -3,6 +3,7 @@ using DATN.Application.Lte4gHandler.Commands.DeleteLte4g;
 using DATN.Application.Lte4gHandler.Commands.UpdateLte4g;
 using DATN.Application.Lte4gHandler.Queries.GetLte4g;
 using DATN.Application.Lte4gHandler.Queries.GetLte4gByImei;
+using DATN.Application.Lte4gHandler.Queries.GetLte4gByMultipleImei;
 using DATN.Application.Lte4gHandler.Queries.GetLte4gPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -50,6 +51,14 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
 			var query = new GetLte4gByImeiQuery(imei);
+			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpGet("/api/lte4g/mutipleImei{imei}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
+		{
+			var query = new GetLte4gMultipleImeiQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}

@@ -107,6 +107,9 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         {
             return await _context.Set<T>().Where(a => a.IsDeleted == false).ToListAsync();
         }
+
+
+
         public async Task<IReadOnlyList<T>> BGetPagingAsync(int skip, int pageSize)
         {
             return await _context.Set<T>().Where(a => a.IsDeleted == false).Skip(skip).Take(pageSize).ToListAsync();
@@ -120,6 +123,10 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         {
             return await _context.Set<T>().Where(a => a.IsDeleted == false).CountAsync();
         }
+ 
+
+
+
         public async Task<T> BGetByIdAsync(int id)
         {
             var entity = await _context.Set<T>().FirstOrDefaultAsync(t => t.Id.Equals(id));
@@ -130,6 +137,7 @@ namespace DATN.Infastructure.Repositories.BaseRepository
             }
             return entity;
         }
+        //Bach custom
         public async Task<T> BGetByImeiAsync(string imei)
         {
             var entity = await _context.Set<T>().FirstOrDefaultAsync(t => t.Imei.Equals(imei));
@@ -139,6 +147,14 @@ namespace DATN.Infastructure.Repositories.BaseRepository
                 return null;
             }
             return entity;
+        }
+        public async Task<IReadOnlyList<T>> BGetMultipleImeiAsync(string imei)
+        {
+            return await _context.Set<T>().Where(a => a.IsDeleted == false).Where(a => a.Imei == imei).ToListAsync();
+        }
+        public async Task<int> BGetTotalImeiAsync(string imei)
+        {
+            return await _context.Set<T>().Where(a => a.IsDeleted == false).Where(a => a.Imei == imei).CountAsync();
         }
         #endregion
     }
