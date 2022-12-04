@@ -18,6 +18,10 @@ namespace DATN.Application.AccountHandler.Commands.CreateAccount
 		public string Imei { get; set; }
 		public string UserName { get; set; }
 		public string Password { get; set; }
+		public bool IsDeleted { get; set; }
+		public DateTime TimingCreate { get; set; }
+		public DateTime TimingUpdate { get; set; }
+		public DateTime TimingDelete { get; set; }
 
 	}
 	public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, BResult>

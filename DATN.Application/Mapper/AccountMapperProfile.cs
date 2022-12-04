@@ -15,6 +15,7 @@ namespace DATN.Application.Mapper
         public AccountMapperProfile()
         {
             CreateMap<Account, CreateAccountCommand>().ReverseMap();
+            CreateMap<Account, UpdateAccountPassCommand>().ReverseMap();
             CreateMap<Account, UpdateAccountCommand>().ReverseMap();
             CreateMap<Account, GetAccountResponse>().ReverseMap();
             CreateMap<Account, GetAccountPagingResponse>().ReverseMap();
