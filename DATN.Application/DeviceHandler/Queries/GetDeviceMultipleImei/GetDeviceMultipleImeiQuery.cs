@@ -35,11 +35,11 @@ namespace DATN.Application.DeviceHandler.Queries.GetDeviceByMultipleImei
         public DateTime TimingDelete { get; set; }
     }
 
-    public class GetDeviceMultipleImeQueryHandler : IRequestHandler<GetDeviceMultipleImeiQuery, BResult<BPaging<GetDeviceMultipleImeiResponse>>>
+    public class GetDeviceMultipleImeiQueryHandler : IRequestHandler<GetDeviceMultipleImeiQuery, BResult<BPaging<GetDeviceMultipleImeiResponse>>>
     {
         private readonly IDeviceRepository _deviceRepository;
 
-        public GetDeviceMultipleImeQueryHandler(IDeviceRepository deviceRepository)
+        public GetDeviceMultipleImeiQueryHandler(IDeviceRepository deviceRepository)
         {
             _deviceRepository = deviceRepository;
         }

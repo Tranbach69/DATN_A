@@ -48,11 +48,11 @@ namespace DATN.Application.WifiHandler.Queries.GetWifiByMultipleImei
         public DateTime TimingDelete { get; set; }
     }
 
-    public class GetWifiMultipleImeQueryHandler : IRequestHandler<GetWifiMultipleImeiQuery, BResult<BPaging<GetWifiMultipleImeiResponse>>>
+    public class GetWifiMultipleImeiQueryHandler : IRequestHandler<GetWifiMultipleImeiQuery, BResult<BPaging<GetWifiMultipleImeiResponse>>>
     {
         private readonly IWifiRepository _wifiRepository;
 
-        public GetWifiMultipleImeQueryHandler(IWifiRepository wifiRepository)
+        public GetWifiMultipleImeiQueryHandler(IWifiRepository wifiRepository)
         {
             _wifiRepository = wifiRepository;
         }

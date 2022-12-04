@@ -35,11 +35,11 @@ namespace DATN.Application.UserHandler.Queries.GetUserByMultipleImei
         public DateTime TimingDelete { get; set; }
     }
 
-    public class GetUserMultipleImeQueryHandler : IRequestHandler<GetUserMultipleImeiQuery, BResult<BPaging<GetUserMultipleImeiResponse>>>
+    public class GetUserMultipleImeiQueryHandler : IRequestHandler<GetUserMultipleImeiQuery, BResult<BPaging<GetUserMultipleImeiResponse>>>
     {
         private readonly IUserRepository _userRepository;
 
-        public GetUserMultipleImeQueryHandler(IUserRepository userRepository)
+        public GetUserMultipleImeiQueryHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

@@ -33,11 +33,11 @@ namespace DATN.Application.AccountHandler.Queries.GetAccountByMultipleImei
         public DateTime TimingDelete { get; set; }
     }
 
-    public class GetAccountMultipleImeQueryHandler : IRequestHandler<GetAccountMultipleImeiQuery, BResult<BPaging<GetAccountMultipleImeiResponse>>>
+    public class GetAccountMultipleImeiQueryHandler : IRequestHandler<GetAccountMultipleImeiQuery, BResult<BPaging<GetAccountMultipleImeiResponse>>>
     {
         private readonly IAccountRepository _accountRepository;
 
-        public GetAccountMultipleImeQueryHandler(IAccountRepository accountRepository)
+        public GetAccountMultipleImeiQueryHandler(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
         }

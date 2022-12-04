@@ -36,11 +36,11 @@ namespace DATN.Application.EthernetHandler.Queries.GetEthernetByMultipleImei
         public DateTime TimingDelete { get; set; }
     }
 
-    public class GetEthernetMultipleImeQueryHandler : IRequestHandler<GetEthernetMultipleImeiQuery, BResult<BPaging<GetEthernetMultipleImeiResponse>>>
+    public class GetEthernetMultipleImeiQueryHandler : IRequestHandler<GetEthernetMultipleImeiQuery, BResult<BPaging<GetEthernetMultipleImeiResponse>>>
     {
         private readonly IEthernetRepository _ethernetRepository;
 
-        public GetEthernetMultipleImeQueryHandler(IEthernetRepository ethernetRepository)
+        public GetEthernetMultipleImeiQueryHandler(IEthernetRepository ethernetRepository)
         {
             _ethernetRepository = ethernetRepository;
         }

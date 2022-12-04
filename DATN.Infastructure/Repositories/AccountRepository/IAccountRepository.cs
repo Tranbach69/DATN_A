@@ -12,5 +12,7 @@ namespace DATN.Infastructure.Repositories.AccountRepository
 	{
 		public Task<Account> CheckAuth(string userName, string password);
 		public Task ChangePassword(int id, string oldPassword, string newPassword);
+		Task<IReadOnlyList<Account>> GetMultipleRoleAsync(int role, int skip, int pageSize);
+		Task<int> GetTotalRoleAsync(int role);
 	}
 }

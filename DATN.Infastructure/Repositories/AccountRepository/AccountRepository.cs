@@ -1,6 +1,7 @@
 ﻿using DATN.Core.Entities;
 using DATN.Infastructure.Persistence;
 using DATN.Infastructure.Repositories.BaseRepository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace DATN.Infastructure.Repositories.AccountRepository
             var account = await BFistOrDefaultAsync(acc => acc.Id == id && acc.Password == oldPassword);
             account.Password = newPassword;
             await _context.SaveChangesAsync();
+        }
+        public async Task<IReadOnlyList<Account>> GetMultipleRoleAsync(int role, int skip, int pageSize)
+        {
+            return await _context.Set<Account>().Where(a => a.IsDeleted == false).Where(a => a.Role == role).Skip(skip).Take(pageSize).ToListAsync();
+        }
+        public async Task<int> GetTotalRoleAsync(int role)
+        {
+            return await _context.Set<Account>().Where(a => a.IsDeleted == false).Where(a => a.Role == role).CountAsync();
         }
     }
 }

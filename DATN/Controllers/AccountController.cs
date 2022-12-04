@@ -4,6 +4,7 @@ using DATN.Application.AccountHandler.Commands.UpdateAccount;
 using DATN.Application.AccountHandler.Queries.GetAccount;
 using DATN.Application.AccountHandler.Queries.GetAccountByImei;
 using DATN.Application.AccountHandler.Queries.GetAccountByMultipleImei;
+using DATN.Application.AccountHandler.Queries.GetAccountMultipleRole;
 using DATN.Application.AccountHandler.Queries.GetAccountPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -79,6 +80,13 @@ namespace DATN.Api.Controllers
 		{
 			var query = new GetAccountMultipleImeiQuery(imei);
 			var result = await _mediator.Send(query);
+			return Ok(result);
+		}
+		[HttpGet("/api/account/mutipleRole")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> GetMulipleRole([FromQuery] GetAccountMultipleRoleQuery queries)
+		{
+			var result = await _mediator.Send(queries);
 			return Ok(result);
 		}
 

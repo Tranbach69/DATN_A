@@ -37,11 +37,11 @@ namespace DATN.Application.GpsHandler.Queries.GetGpsByMultipleImei
         public DateTime TimingDelete { get; set; }
     }
 
-    public class GetGpsMultipleImeQueryHandler : IRequestHandler<GetGpsMultipleImeiQuery, BResult<BPaging<GetGpsMultipleImeiResponse>>>
+    public class GetGpsMultipleImeiQueryHandler : IRequestHandler<GetGpsMultipleImeiQuery, BResult<BPaging<GetGpsMultipleImeiResponse>>>
     {
         private readonly IGpsRepository _gpsRepository;
 
-        public GetGpsMultipleImeQueryHandler(IGpsRepository gpsRepository)
+        public GetGpsMultipleImeiQueryHandler(IGpsRepository gpsRepository)
         {
             _gpsRepository = gpsRepository;
         }

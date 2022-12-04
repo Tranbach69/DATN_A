@@ -44,11 +44,11 @@ namespace DATN.Application.Lte4gHandler.Queries.GetLte4gByMultipleImei
         public DateTime TimingDelete { get; set; }
     }
 
-    public class GetLte4gMultipleImeQueryHandler : IRequestHandler<GetLte4gMultipleImeiQuery, BResult<BPaging<GetLte4gMultipleImeiResponse>>>
+    public class GetLte4gMultipleImeiQueryHandler : IRequestHandler<GetLte4gMultipleImeiQuery, BResult<BPaging<GetLte4gMultipleImeiResponse>>>
     {
         private readonly ILte4gRepository _lte4gRepository;
 
-        public GetLte4gMultipleImeQueryHandler(ILte4gRepository lte4gRepository)
+        public GetLte4gMultipleImeiQueryHandler(ILte4gRepository lte4gRepository)
         {
             _lte4gRepository = lte4gRepository;
         }
