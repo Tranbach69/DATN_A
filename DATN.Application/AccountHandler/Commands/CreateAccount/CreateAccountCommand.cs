@@ -36,7 +36,27 @@ namespace DATN.Application.AccountHandler.Commands.CreateAccount
 		public async Task<BResult> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
 		{
 			var entity = AccountMapper.Mapper.Map<Account>(request);
-			await _accRepository.BAddAsync(entity);
+			var result= await _accRepository.AddAccountAsync(entity);
+			if (result == null) {
+				if (request.Role > 2)
+				{
+					return BResult.Failure("quyền không hợp lệ: user:2, admin:1");
+				}
+				else if (request.Role == 2 && request.Imei == "")
+				{
+					return BResult.Failure("số Imei của user không được phép để trống ");
+
+				}
+				else if (request.Role == 2) { 
+					return BResult.Failure("số Imei đã tồn tại ");
+				}
+				else if (request.Role <2)
+				{
+					return BResult.Failure("số Imei của admin phải đề trống");
+				}
+				else return BResult.Success();
+			}
+
 			return BResult.Success();
 		}
 	}
