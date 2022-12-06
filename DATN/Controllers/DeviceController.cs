@@ -41,9 +41,9 @@ namespace DATN.Api.Controllers
 		}
 		[HttpGet("deviceUserList")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> GetAllDeviceUserList()
+		public async Task<ActionResult<bool>> Get([FromQuery] GetDevicesWithUserInfoQuery queries)
 		{
-			var result = await _mediator.Send(new GetDevicesWithUserInfoQuery());
+			var result = await _mediator.Send(queries);
 			return Ok(result);
 		}
 

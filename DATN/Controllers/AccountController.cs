@@ -28,7 +28,7 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Create([FromBody] CreateAccountCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 		[HttpPut]
 		[ProducesResponseType(StatusCodes.Status200OK)]

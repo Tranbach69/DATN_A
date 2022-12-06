@@ -10,5 +10,7 @@ namespace DATN.Infastructure.Repositories.WifiRepository
 {
 	public interface IWifiRepository: IRepository<Wifi>
 	{
+		Task<Wifi> AddWifiAsync(Wifi entity);
 	}
+	
 }

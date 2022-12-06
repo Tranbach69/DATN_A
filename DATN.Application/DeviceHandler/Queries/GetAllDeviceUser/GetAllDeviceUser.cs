@@ -12,8 +12,10 @@ using System.Threading.Tasks;
 
 namespace DATN.Application.DeviceHandler.Queries.GetAllDeviceUser
 {
-	public class GetDevicesWithUserInfoQuery : IRequest<List<GetDevicesWithUserInfoResponse>>
+	public class GetDevicesWithUserInfoQuery : IRequest<BResult<BPaging<GetDevicesWithUserInfoResponse>>>
 	{
+		public int Skip { get; set; }
+		public int PageSize { get; set; }
 
 	}
 
@@ -35,7 +37,7 @@ namespace DATN.Application.DeviceHandler.Queries.GetAllDeviceUser
 		public string Email { get; set; }
 	}
 
-	public class GetDevicesWithUserInfoQueryHandler : IRequestHandler<GetDevicesWithUserInfoQuery, List<GetDevicesWithUserInfoResponse>>
+	public class GetDevicesWithUserInfoQueryHandler : IRequestHandler<GetDevicesWithUserInfoQuery, BResult<BPaging<GetDevicesWithUserInfoResponse>>>
 	{
 		private readonly IDeviceRepository _deviceRepository;
 		private readonly IUserRepository _userRepository;
@@ -47,7 +49,7 @@ namespace DATN.Application.DeviceHandler.Queries.GetAllDeviceUser
 			_userRepository = userRepository;
 		}
 
-		public async Task<List<GetDevicesWithUserInfoResponse>> Handle(GetDevicesWithUserInfoQuery request, CancellationToken cancellationToken)
+		public async Task<BResult<BPaging<GetDevicesWithUserInfoResponse>>> Handle(GetDevicesWithUserInfoQuery request, CancellationToken cancellationToken)
 		{
 			var devices = await _deviceRepository.BGetAllAsync();
 			var users = await _userRepository.BGetAllAsync();
@@ -69,7 +71,15 @@ namespace DATN.Application.DeviceHandler.Queries.GetAllDeviceUser
 									  Phone = user.Phone,
 									  Email= user.Email,
 								  };
-			return devicesWithUser.ToList();
+			var total = devicesWithUser.Count();
+			var item =  devicesWithUser.Skip(request.Skip).Take(request.PageSize).ToList();
+
+			var result = new BPaging<GetDevicesWithUserInfoResponse>()
+			{
+				Items = item,
+				TotalItems = total,
+			};
+			return BResult<BPaging<GetDevicesWithUserInfoResponse>>.Success(result);
 			//var deviceUserList = await _deviceRepository.GetAllDeviceWithUserInfo();
 			//return DeviceUserMapper.Mapper.Map<List<GetDevicesWithUserInfoResponse>>(deviceUserList);
 		}
