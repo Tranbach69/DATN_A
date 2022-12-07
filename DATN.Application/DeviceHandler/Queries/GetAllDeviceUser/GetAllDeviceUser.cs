@@ -57,7 +57,7 @@ namespace DATN.Application.DeviceHandler.Queries.GetAllDeviceUser
 								  join device in devices on user.Imei equals device.Imei
 								  select new GetDevicesWithUserInfoResponse
 								  {
-									  DeviceName = device.Name,
+									  DeviceName = device.OwnerName,
 									  Imei = device.Imei,
 									  Price = device.Price,
 									  EquipmentShop = device.EquipmentShop,

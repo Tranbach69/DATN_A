@@ -37,7 +37,15 @@ namespace DATN.Application.AccountHandler.Commands.UpdateAccount
         public async Task<BResult> Handle(UpdateAccountCommand request, CancellationToken cancellationToken)
         {
             var entity = AccountMapper.Mapper.Map<Account>(request);
-            await _accountRepository.BUpdateAsync(entity);
+            var result =await _accountRepository.UpdateAccountAsync(entity);
+            if (result == null)
+            {
+                if (request.Imei == "")
+                {
+                    return BResult.Failure("Imei phải có giá trị");
+                }
+                else return BResult.Failure("Imei đã tồn tại");
+            }
             return BResult.Success();
         }
     }

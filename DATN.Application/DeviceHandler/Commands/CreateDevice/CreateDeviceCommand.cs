@@ -14,12 +14,18 @@ namespace DATN.Application.DeviceHandler.Commands.CreateDevice
 {
 	public class CreateDeviceCommand : IRequest<BResult>
 	{
+		public int Id { get; set; }
 		public string Imei { get; set; }
-		public string Name { get; set; }
+		public string DeviceName { get; set; }
 		public float Price { get; set; }
 		public string EquipmentShop { get; set; }
 		public string PurchaseDate { get; set; }
 		public string WarrantyPeriod { get; set; }
+		public string Phone { get; set; }
+		public int Age { get; set; }
+		public string OwnerName { get; set; }
+		public string Address { get; set; }
+		public string Email { get; set; }
 		public bool IsDeleted { get; set; }
 		public DateTime TimingCreate { get; set; }
 		public DateTime TimingUpdate { get; set; }
@@ -37,7 +43,15 @@ namespace DATN.Application.DeviceHandler.Commands.CreateDevice
 		public async Task<BResult> Handle(CreateDeviceCommand request, CancellationToken cancellationToken)
 		{
 			var entity = DeviceMapper.Mapper.Map<Device>(request);
-			await _deviceRepository.BAddAsync(entity);
+			var result=await _deviceRepository.AddDeviceAsync(entity);
+			if (result == null)
+			{
+				if (request.Imei =="")
+				{
+					return BResult.Failure("Imei phải có giá trị");
+				}
+				else return BResult.Failure("Imei đã tồn tại");
+			}
 			return BResult.Success();
 		}
 	}

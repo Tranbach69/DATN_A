@@ -35,7 +35,7 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Update([FromBody] UpdateAccountCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
 		[HttpPut("changepass")]

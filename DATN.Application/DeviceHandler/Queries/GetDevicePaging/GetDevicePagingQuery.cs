@@ -19,13 +19,18 @@ namespace DATN.Application.DeviceHandler.Queries.GetDevicePaging
     }
     public class GetDevicePagingResponse
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Imei { get; set; }
-        public string Name { get; set; }
+        public string DeviceName { get; set; }
         public float Price { get; set; }
         public string EquipmentShop { get; set; }
         public string PurchaseDate { get; set; }
         public string WarrantyPeriod { get; set; }
+        public string Phone { get; set; }
+        public int Age { get; set; }
+        public string OwnerName { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime TimingCreate { get; set; }
         public DateTime TimingUpdate { get; set; }

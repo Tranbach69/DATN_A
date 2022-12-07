@@ -29,7 +29,7 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Create([FromBody] CreateDeviceCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
 		[HttpPut]
@@ -37,7 +37,7 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Update([FromBody] UpdateDeviceCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 		[HttpGet("deviceUserList")]
 		[ProducesResponseType(StatusCodes.Status200OK)]

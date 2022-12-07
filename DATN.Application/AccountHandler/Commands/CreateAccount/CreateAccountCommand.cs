@@ -54,7 +54,6 @@ namespace DATN.Application.AccountHandler.Commands.CreateAccount
 				{
 					return BResult.Failure("số Imei của admin phải đề trống");
 				}
-				else return BResult.Success();
 			}
 
 			return BResult.Success();

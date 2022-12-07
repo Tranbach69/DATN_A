@@ -15,5 +15,6 @@ namespace DATN.Infastructure.Repositories.AccountRepository
 		Task<IReadOnlyList<Account>> GetMultipleRoleAsync(int role, int skip, int pageSize);
 		Task<int> GetTotalRoleAsync(int role);
 		Task<Account> AddAccountAsync(Account entity);
+		Task<Account> UpdateAccountAsync(Account entity);
 	}
 }
