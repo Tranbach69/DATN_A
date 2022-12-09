@@ -1,10 +1,5 @@
 ﻿using DATN.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DATN.Infastructure.Persistence.Configurations
 {
@@ -14,10 +9,10 @@ namespace DATN.Infastructure.Persistence.Configurations
         {
             modelBuilder.Entity<Lte4g>(e => {
                 e.ToTable("Lte4g");
-                //e.HasOne<Device>(sc => sc.Device)
-                //      .WithOne(s => s.Lte4g)
-                //      .HasForeignKey<Lte4g>(s => s.Lte4gOfDeviceId);
-
+                e.HasKey(e => e.Imei);
+                e.HasOne<Device>(s => s.Device)
+                    .WithOne(ss => ss.Lte4g)
+                    .HasForeignKey<Lte4g>(s => s.Imei);
 
             });
 

@@ -13,16 +13,15 @@ namespace DATN.Application.DeviceHandler.Queries.GetDevice
 {
     public class GetDeviceQuery : IRequest<GetDeviceResponse>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public GetDeviceQuery(int id)
+        public GetDeviceQuery(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
     public class GetDeviceResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string DeviceName { get; set; }
         public float Price { get; set; }
@@ -51,7 +50,7 @@ namespace DATN.Application.DeviceHandler.Queries.GetDevice
 
         public async Task<GetDeviceResponse> Handle(GetDeviceQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _deviceRepository.BGetByIdAsync(request.Id);
+            var entity = await _deviceRepository.BGetByImeiAsync(request.Imei);
             var result = DeviceMapper.Mapper.Map<GetDeviceResponse>(entity);
             return result;
 

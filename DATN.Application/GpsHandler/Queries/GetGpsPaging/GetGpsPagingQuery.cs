@@ -19,7 +19,6 @@ namespace DATN.Application.GpsHandler.Queries.GetGpsPaging
     }
     public class GetGpsPagingResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }

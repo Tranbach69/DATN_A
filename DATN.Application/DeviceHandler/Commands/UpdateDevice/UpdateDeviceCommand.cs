@@ -14,7 +14,6 @@ namespace DATN.Application.DeviceHandler.Commands.UpdateDevice
 {
     public class UpdateDeviceCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string DeviceName { get; set; }
         public float Price { get; set; }
@@ -44,14 +43,15 @@ namespace DATN.Application.DeviceHandler.Commands.UpdateDevice
         public async Task<BResult> Handle(UpdateDeviceCommand request, CancellationToken cancellationToken)
         {
             var entity = DeviceMapper.Mapper.Map<Device>(request);
-            var result= await _deviceRepository.UpdateDeviceAsync(entity);
+            var result = await _deviceRepository.BUpdateAsync(entity);
             if (result == null)
             {
-                if (request.Imei == "")
-                {
-                    return BResult.Failure("Imei phải có giá trị");
-                }
-                else return BResult.Failure("Imei đã tồn tại");
+				if (request.Imei == "")
+				{
+					return BResult.Failure("Imei phải có giá trị");
+				}
+				else return BResult.Failure("Imei không tồn tại");
+				
             }
             return BResult.Success();
         }

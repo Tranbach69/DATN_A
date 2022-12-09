@@ -39,7 +39,16 @@ namespace DATN.Application.EthernetHandler.Commands.CreateEthernet
 		public async Task<BResult> Handle(CreateEthernetCommand request, CancellationToken cancellationToken)
 		{
 			var entity = EthernetMapper.Mapper.Map<Ethernet>(request);
-			await _EthernetRepository.BAddAsync(entity);
+			var result = await _EthernetRepository.BAddAsync(entity);
+			if (result == null)
+			{
+				if (request.Imei == "")
+				{
+					return BResult.Failure("Imei phải có giá trị");
+				}
+				else return BResult.Failure("Không Thành Công, Xem Lại Thông Tin Đã nhập: imei có bị trùng ...");
+
+			}
 			return BResult.Success();
 		}
 	}

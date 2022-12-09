@@ -23,6 +23,8 @@ namespace DATN.Core.Entities
 		public string Afrcn { get; set; }
 		public string PhoneNumber { get; set; }
 		public string Rssi4G { get; set; }
+		public Device Device { get; set; }
+
 
 	}
 }

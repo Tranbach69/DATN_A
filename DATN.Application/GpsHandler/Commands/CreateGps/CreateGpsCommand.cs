@@ -39,7 +39,16 @@ namespace DATN.Application.GpsHandler.Commands.CreateGps
 		public async Task<BResult> Handle(CreateGpsCommand request, CancellationToken cancellationToken)
 		{
 			var entity = GpsMapper.Mapper.Map<Gps>(request);
-			await _GpsRepository.BAddAsync(entity);
+			var result = await _GpsRepository.BAddAsync(entity);
+			if (result == null)
+			{
+				if (request.Imei == "")
+				{
+					return BResult.Failure("Imei phải có giá trị");
+				}
+				else return BResult.Failure("Không Thành Công, Xem Lại Thông Tin Đã nhập: imei có bị trùng không...");
+
+			}
 			return BResult.Success();
 		}
 	}

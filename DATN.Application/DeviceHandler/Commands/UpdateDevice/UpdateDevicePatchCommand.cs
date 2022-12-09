@@ -15,12 +15,12 @@ namespace DATN.Application.DeviceHandler.Commands.UpdateDevice
 {
 	public class UpdateDevicePatchCommand : IRequest<BResult>
 	{
-		public UpdateDevicePatchCommand(int id, JsonPatchDocument requestPatch)
+		public UpdateDevicePatchCommand(string imei, JsonPatchDocument requestPatch)
 		{
-			Id = id;
+			Imei = imei;
 			RequestPatch = requestPatch;
 		}
-		public int Id { get; set; }
+		public string Imei { get; set; }
 		public JsonPatchDocument RequestPatch { get;  set; }
 		//public string Op { get; set; }
 		//public string Path { get; set; }
@@ -41,7 +41,7 @@ namespace DATN.Application.DeviceHandler.Commands.UpdateDevice
 		{
 			//var entity = WifiMapper.Mapper.Map<Wifi>(request);
 			
-			await _deviceRepository.BUpdateTPatchAsync(request.Id, request.RequestPatch);
+			await _deviceRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 			return BResult.Success();
 		}
 	}

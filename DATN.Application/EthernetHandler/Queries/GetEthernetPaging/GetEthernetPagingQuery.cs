@@ -19,7 +19,6 @@ namespace DATN.Application.EthernetHandler.Queries.GetEthernetPaging
     }
     public class GetEthernetPagingResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string DriverType { get; set; }
         public string BringUpdownEn { get; set; }

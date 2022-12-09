@@ -17,13 +17,13 @@ namespace DATN.Infastructure.Repositories.BaseRepository
 
         #region delete
         Task BDeleteAsync(T entity);
-        Task BDeleteByIdAsync(int id);
+        Task<T> BDeleteByImeiAsync(string imei);
         Task BDeleteAsync(Expression<Func<T, bool>> predicate);
         #endregion
 
         #region update
-        Task BUpdateAsync(T entity);
-        Task BUpdateTPatchAsync(int id, JsonPatchDocument TModel);
+        Task<T> BUpdateAsync(T entity);
+        Task BUpdateTPatchImeiAsync(string imei, JsonPatchDocument TModel);
         #endregion
 
         #region get
@@ -34,9 +34,7 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         Task<IReadOnlyList<T>> BGetPagingAsync(int skip, int pageSize);
         Task<IReadOnlyList<T>> BGetAsync(Func<T, bool> predicate);
         Task<int> BGetTotalAsync();
-        Task<T> BGetByIdAsync(int id);
-
-        //Bach Custom
+  
         Task<T> BGetByImeiAsync(string imei);
         Task<IReadOnlyList<T>> BGetMultipleImeiAsync(string imei);
         Task<int> BGetTotalImeiAsync(string imei);

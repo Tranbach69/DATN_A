@@ -39,40 +39,40 @@ namespace DATN.Infastructure.Repositories.DeviceRepository
 		{
 		}
 
-		public async Task<Device> AddDeviceAsync(Device entity)
-		{
-			entity.TimingCreate = System.DateTime.Now;
-			entity.IsDeleted = false;
-			if (entity.Imei == "") return null;
-			var a = await _context.Set<Device>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei));
-			if (a != null) return null;
-			await _context.Set<Device>().AddAsync(entity);
-			await _context.SaveChangesAsync();
-			return entity;
-		}
+		//public async Task<Device> AddDeviceAsync(Device entity)
+		//{
+		//	entity.TimingCreate = System.DateTime.Now;
+		//	entity.IsDeleted = false;
+		//	if (entity.Imei == "") return null;
+		//	var a = await _context.Set<Device>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei));
+		//	if (a != null) return null;
+		//	await _context.Set<Device>().AddAsync(entity);
+		//	await _context.SaveChangesAsync();
+		//	return entity;
+		//}
 
-		public async Task<Device> UpdateDeviceAsync(Device entity)
-		{
-			entity.TimingUpdate = System.DateTime.Now;
-			entity.IsDeleted = false;
-			if (entity.Imei == "") return null;
-			_context.Entry(entity).State = EntityState.Modified;
-			var a = await _context.Set<Device>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei));
-			if (a != null)
-			{
-				if (entity.Imei == a.Imei && entity.Id == a.Id)
-				{
-					await _context.SaveChangesAsync();
-					return entity;
-				}
-				else
-				{
-					return null;
-				}
-			}
-			await _context.SaveChangesAsync();
-			return entity;
-		}
+		//public async Task<Device> UpdateDeviceAsync(Device entity)
+		//{
+		//	entity.TimingUpdate = System.DateTime.Now;
+		//	entity.IsDeleted = false;
+		//	if (entity.Imei == "") return null;
+		//	_context.Entry(entity).State = EntityState.Modified;
+		//	var a = await _context.Set<Device>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei));
+		//	if (a != null)
+		//	{
+		//		if (entity.Imei == a.Imei && entity.Id == a.Id)
+		//		{
+		//			await _context.SaveChangesAsync();
+		//			return entity;
+		//		}
+		//		else
+		//		{
+		//			return null;
+		//		}
+		//	}
+		//	await _context.SaveChangesAsync();
+		//	return entity;
+		//}
 
 		//public async Task<Device> CheckAuth(string userName, string password)
 		//{

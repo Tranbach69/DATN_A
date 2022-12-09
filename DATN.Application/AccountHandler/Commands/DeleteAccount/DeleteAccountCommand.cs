@@ -31,7 +31,7 @@ namespace DATN.Application.AccountHandler.Commands.DeleteAccount
 
         public async Task<BResult> Handle(DeleteAccountCommand request, CancellationToken cancellationToken)
         {
-            await _accRepository.BDeleteByIdAsync(request.Id);
+            await _accRepository.DeleteAccountByIdAsync(request.Id);
             return BResult.Success();
         }
     }

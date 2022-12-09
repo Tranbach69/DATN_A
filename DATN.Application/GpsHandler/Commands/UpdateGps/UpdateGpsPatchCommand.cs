@@ -15,12 +15,12 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 {
 	public class UpdateGpsPatchCommand : IRequest<BResult>
 	{
-		public UpdateGpsPatchCommand(int id, JsonPatchDocument requestPatch)
+		public UpdateGpsPatchCommand(string imei, JsonPatchDocument requestPatch)
 		{
-			Id = id;
+			Imei = imei;
 			RequestPatch = requestPatch;
 		}
-		public int Id { get; set; }
+		public string Imei { get; set; }
 		public JsonPatchDocument RequestPatch { get;  set; }
 		//public string Op { get; set; }
 		//public string Path { get; set; }
@@ -41,7 +41,7 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 		{
 			//var entity = GpsMapper.Mapper.Map<Gps>(request);
 			
-			await _gpsRepository.BUpdateTPatchAsync(request.Id, request.RequestPatch);
+			await _gpsRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 			return BResult.Success();
 		}
 	}

@@ -15,6 +15,7 @@ namespace DATN.Core.Entities
 		public string IpAddr { get; set; }
 		public string DriverEn { get; set; }
 		public string Netmask { get; set; }
+		public Device Device { get; set; }
 
 	}
 }

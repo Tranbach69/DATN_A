@@ -12,11 +12,11 @@ namespace DATN.Application.GpsHandler.Commands.DeleteGps
 {
     public class DeleteGpsCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public DeleteGpsCommand(int id)
+        public DeleteGpsCommand(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
 
@@ -31,7 +31,11 @@ namespace DATN.Application.GpsHandler.Commands.DeleteGps
 
         public async Task<BResult> Handle(DeleteGpsCommand request, CancellationToken cancellationToken)
         {
-            await _GpsRepository.BDeleteByIdAsync(request.Id);
+            var result = await _GpsRepository.BDeleteByImeiAsync(request.Imei);
+            if (result == null)
+            {
+                return BResult.Failure("imei không tồn tại");
+            }
             return BResult.Success();
         }
     }

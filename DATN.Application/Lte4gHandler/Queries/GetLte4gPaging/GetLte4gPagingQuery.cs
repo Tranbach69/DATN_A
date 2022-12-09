@@ -18,7 +18,6 @@ namespace DATN.Application.Lte4gHandler.Queries.GetLte4gPaging
     }
     public class GetLte4gPagingResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string SimStatus { get; set; }
         public string SimIccid { get; set; }

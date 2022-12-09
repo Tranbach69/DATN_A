@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DATN.Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221207021513_dbInit")]
+    [Migration("20221209084522_dbInit")]
     partial class dbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,15 +54,13 @@ namespace DATN.Infastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountAdmin");
+                    b.ToTable("Account");
                 });
 
             modelBuilder.Entity("DATN.Core.Entities.Device", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Imei")
+                        .HasColumnType("text");
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
@@ -77,9 +75,6 @@ namespace DATN.Infastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("EquipmentShop")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Imei")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
@@ -109,17 +104,15 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("WarrantyPeriod")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("Imei");
 
                     b.ToTable("Device");
                 });
 
             modelBuilder.Entity("DATN.Core.Entities.Ethernet", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Imei")
+                        .HasColumnType("text");
 
                     b.Property<string>("BringUpdownEn")
                         .HasColumnType("text");
@@ -128,9 +121,6 @@ namespace DATN.Infastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("DriverType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Imei")
                         .HasColumnType("text");
 
                     b.Property<string>("IpAddr")
@@ -154,17 +144,15 @@ namespace DATN.Infastructure.Migrations
                     b.Property<DateTime>("TimingUpdate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("Imei");
 
                     b.ToTable("Ethernet");
                 });
 
             modelBuilder.Entity("DATN.Core.Entities.Gps", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Imei")
+                        .HasColumnType("text");
 
                     b.Property<string>("Accuracy")
                         .HasColumnType("text");
@@ -173,9 +161,6 @@ namespace DATN.Infastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Bearing")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Imei")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
@@ -202,17 +187,15 @@ namespace DATN.Infastructure.Migrations
                     b.Property<DateTime>("TimingUpdate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("Imei");
 
                     b.ToTable("Gps");
                 });
 
             modelBuilder.Entity("DATN.Core.Entities.Lte4g", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.Property<string>("Imei")
+                        .HasColumnType("text");
 
                     b.Property<string>("Afrcn")
                         .HasColumnType("text");
@@ -221,9 +204,6 @@ namespace DATN.Infastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("FreqBand")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Imei")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
@@ -271,29 +251,111 @@ namespace DATN.Infastructure.Migrations
                     b.Property<DateTime>("TimingUpdate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("Id");
+                    b.HasKey("Imei");
 
                     b.ToTable("Lte4g");
                 });
 
-            modelBuilder.Entity("DATN.Core.Entities.StationWifi", b =>
+            modelBuilder.Entity("DATN.Core.Entities.Wifi", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
                     b.Property<string>("Imei")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AuthPwdWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AuthPwdWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AuthTypeWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AuthTypeWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BroadCastWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BroadCastWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ChannelModeWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ChannelModeWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ChannelWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ChannelWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClientCountWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ClientCountWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CurrentAp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpEndIpWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpEndIpWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpHostIpWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpHostIpWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpStartIpWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpStartIpWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpTimeWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DhcpTimeWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EncryptModeWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("EncryptModeWifi2")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("IsolationWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("IsolationWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MacAddressWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MacAddressWifi2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SsidWifi1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SsidWifi2")
+                        .HasColumnType("text");
+
                     b.Property<string>("StaIp")
                         .HasColumnType("text");
 
-                    b.Property<int>("StaPassword")
-                        .HasColumnType("integer");
+                    b.Property<string>("StaPassword")
+                        .HasColumnType("text");
 
                     b.Property<string>("StaProtocol")
                         .HasColumnType("text");
@@ -313,121 +375,6 @@ namespace DATN.Infastructure.Migrations
                     b.Property<DateTime>("TimingUpdate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("StationWifi");
-                });
-
-            modelBuilder.Entity("DATN.Core.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Imei")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("TimingCreate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("TimingDelete")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("TimingUpdate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("DATN.Core.Entities.Wifi", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("AuthPwd")
-                        .HasColumnType("text");
-
-                    b.Property<string>("AuthType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("BroadCast")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Channel")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ChannelMode")
-                        .HasColumnType("text");
-
-                    b.Property<int>("ClientCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("CurrentAp")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DhcpEndIp")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DhcpHostIp")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DhcpStartIp")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DhcpTime")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EncryptMode")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Imei")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Isolation")
-                        .HasColumnType("text");
-
-                    b.Property<string>("MacAddress")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Ssid")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<DateTime>("TimingCreate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("TimingDelete")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("TimingUpdate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<string>("WifiMode")
                         .HasColumnType("text");
 
@@ -437,9 +384,64 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("WifiOpen")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("Imei");
 
                     b.ToTable("Wifi");
+                });
+
+            modelBuilder.Entity("DATN.Core.Entities.Ethernet", b =>
+                {
+                    b.HasOne("DATN.Core.Entities.Device", "Device")
+                        .WithOne("Ethernet")
+                        .HasForeignKey("DATN.Core.Entities.Ethernet", "Imei")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Device");
+                });
+
+            modelBuilder.Entity("DATN.Core.Entities.Gps", b =>
+                {
+                    b.HasOne("DATN.Core.Entities.Device", "Device")
+                        .WithOne("Gps")
+                        .HasForeignKey("DATN.Core.Entities.Gps", "Imei")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Device");
+                });
+
+            modelBuilder.Entity("DATN.Core.Entities.Lte4g", b =>
+                {
+                    b.HasOne("DATN.Core.Entities.Device", "Device")
+                        .WithOne("Lte4g")
+                        .HasForeignKey("DATN.Core.Entities.Lte4g", "Imei")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Device");
+                });
+
+            modelBuilder.Entity("DATN.Core.Entities.Wifi", b =>
+                {
+                    b.HasOne("DATN.Core.Entities.Device", "Device")
+                        .WithOne("Wifi")
+                        .HasForeignKey("DATN.Core.Entities.Wifi", "Imei")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Device");
+                });
+
+            modelBuilder.Entity("DATN.Core.Entities.Device", b =>
+                {
+                    b.Navigation("Ethernet");
+
+                    b.Navigation("Gps");
+
+                    b.Navigation("Lte4g");
+
+                    b.Navigation("Wifi");
                 });
 #pragma warning restore 612, 618
         }

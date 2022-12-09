@@ -1,10 +1,6 @@
 ﻿using DATN.Application.Models;
 using DATN.Infastructure.Repositories.Lte4gRepository;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,11 +8,11 @@ namespace DATN.Application.Lte4gHandler.Commands.DeleteLte4g
 {
     public class DeleteLte4gCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public DeleteLte4gCommand(int id)
+        public DeleteLte4gCommand(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
 
@@ -31,7 +27,11 @@ namespace DATN.Application.Lte4gHandler.Commands.DeleteLte4g
 
         public async Task<BResult> Handle(DeleteLte4gCommand request, CancellationToken cancellationToken)
         {
-            await _Lte4gRepository.BDeleteByIdAsync(request.Id);
+            var result = await _Lte4gRepository.BDeleteByImeiAsync(request.Imei);
+            if (result == null)
+            {
+                return BResult.Failure("imei không tồn tại");
+            }
             return BResult.Success();
         }
     }

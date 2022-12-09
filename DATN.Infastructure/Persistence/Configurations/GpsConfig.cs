@@ -1,10 +1,5 @@
 ﻿using DATN.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DATN.Infastructure.Persistence.Configurations
 {
@@ -14,10 +9,10 @@ namespace DATN.Infastructure.Persistence.Configurations
         {
             modelBuilder.Entity<Gps>(e => {
                 e.ToTable("Gps");
-                //e.HasOne<Device>(sc => sc.Device)
-                //    .WithOne(s => s.Gps)
-                //    .HasForeignKey<Gps>(s => s.GpsOfDeviceId);
-
+                e.HasKey(e => e.Imei);
+                e.HasOne<Device>(s => s.Device)
+                    .WithOne(ss => ss.Gps)
+                    .HasForeignKey<Gps>(s => s.Imei);
             });
 
         }

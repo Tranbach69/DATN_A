@@ -19,7 +19,6 @@ namespace DATN.Application.DeviceHandler.Queries.GetDevicePaging
     }
     public class GetDevicePagingResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string DeviceName { get; set; }
         public float Price { get; set; }

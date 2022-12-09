@@ -13,16 +13,15 @@ namespace DATN.Application.GpsHandler.Queries.GetGps
 {
     public class GetGpsQuery : IRequest<GetGpsResponse>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public GetGpsQuery(int id)
+        public GetGpsQuery(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
     public class GetGpsResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
@@ -48,7 +47,7 @@ namespace DATN.Application.GpsHandler.Queries.GetGps
 
         public async Task<GetGpsResponse> Handle(GetGpsQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _GpsRepository.BGetByIdAsync(request.Id);
+            var entity = await _GpsRepository.BGetByImeiAsync(request.Imei);
             var result = GpsMapper.Mapper.Map<GetGpsResponse>(entity);
             return result;
 

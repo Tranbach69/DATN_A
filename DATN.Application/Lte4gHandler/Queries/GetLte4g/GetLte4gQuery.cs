@@ -12,16 +12,15 @@ namespace DATN.Application.Lte4gHandler.Queries.GetLte4g
 {
     public class GetLte4gQuery : IRequest<GetLte4gResponse>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public GetLte4gQuery(int id)
+        public GetLte4gQuery(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
     public class GetLte4gResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string SimStatus { get; set; }
         public string SimIccid { get; set; }
@@ -54,7 +53,7 @@ namespace DATN.Application.Lte4gHandler.Queries.GetLte4g
 
         public async Task<GetLte4gResponse> Handle(GetLte4gQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _Lte4gRepository.BGetByIdAsync(request.Id);
+            var entity = await _Lte4gRepository.BGetByImeiAsync(request.Imei);
             var result = Lte4gMapper.Mapper.Map<GetLte4gResponse>(entity);
             return result;
 

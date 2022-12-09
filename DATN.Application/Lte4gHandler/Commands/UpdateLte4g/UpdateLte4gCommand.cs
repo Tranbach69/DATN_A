@@ -4,9 +4,9 @@ using DATN.Core.Entities;
 using DATN.Infastructure.Repositories.Lte4gRepository;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Newtonsoft.Json;
+
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +15,6 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
 {
     public class UpdateLte4gCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string SimStatus { get; set; }
         public string SimIccid { get; set; }
@@ -31,10 +30,6 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
         public string Afrcn { get; set; }
         public string PhoneNumber { get; set; }
         public string Rssi4G { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime TimingCreate { get; set; }
-        public DateTime TimingUpdate { get; set; }
-        public DateTime TimingDelete { get; set; }
     }
 
     public class UpdateLte4gCommandHandler : IRequestHandler<UpdateLte4gCommand, BResult>
@@ -49,7 +44,37 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
         public async Task<BResult> Handle(UpdateLte4gCommand request, CancellationToken cancellationToken)
         {
             var entity = Lte4gMapper.Mapper.Map<Lte4g>(request);
-            await _lte4gRepository.BUpdateAsync(entity);
+            var result = await _lte4gRepository.BUpdateAsync(entity);
+            if (result == null)
+            {
+                if (request.Imei == "")
+                {
+                    return BResult.Failure("Imei phải có giá trị");
+                }
+                else return BResult.Failure("Imei không tồn tại");
+
+            }
+            const int PORT_NO = 3023;
+            const string SERVER_IP = "localhost";
+
+            string s = "1"+JsonConvert.SerializeObject(request);
+            //---data to send to the server---
+            string textToSend = s;
+
+            //---create a TCPClient object at the IP and port no.---
+            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
+            NetworkStream nwStream = client.GetStream();
+            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
+
+            //---send the text---
+            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+
+            ////---read back the text---
+            //byte[] bytesToRead = new byte[client.ReceiveBufferSize];
+            //int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
+            //Console.WriteLine("Received : " + Encoding.ASCII.GetString(bytesToRead, 0, bytesRead));
+            //Console.ReadLine();
+            client.Close();
             return BResult.Success();
         }
     }

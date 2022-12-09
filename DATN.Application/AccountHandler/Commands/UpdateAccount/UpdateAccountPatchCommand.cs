@@ -39,7 +39,7 @@ namespace DATN.Application.AccountHandler.Commands.UpdateAccount
 		{
 			//var entity = WifiMapper.Mapper.Map<Wifi>(request);
 
-			await _accountRepository.BUpdateTPatchAsync(request.Id, request.RequestPatch);
+			await _accountRepository.UpdateAccountPatchAsync(request.Id, request.RequestPatch);
 			return BResult.Success();
 		}
 	}

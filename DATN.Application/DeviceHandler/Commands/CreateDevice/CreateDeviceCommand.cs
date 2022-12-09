@@ -14,7 +14,6 @@ namespace DATN.Application.DeviceHandler.Commands.CreateDevice
 {
 	public class CreateDeviceCommand : IRequest<BResult>
 	{
-		public int Id { get; set; }
 		public string Imei { get; set; }
 		public string DeviceName { get; set; }
 		public float Price { get; set; }
@@ -43,14 +42,15 @@ namespace DATN.Application.DeviceHandler.Commands.CreateDevice
 		public async Task<BResult> Handle(CreateDeviceCommand request, CancellationToken cancellationToken)
 		{
 			var entity = DeviceMapper.Mapper.Map<Device>(request);
-			var result=await _deviceRepository.AddDeviceAsync(entity);
+			var result = await _deviceRepository.BAddAsync(entity);
 			if (result == null)
 			{
-				if (request.Imei =="")
+				if (request.Imei == "")
 				{
 					return BResult.Failure("Imei phải có giá trị");
 				}
-				else return BResult.Failure("Imei đã tồn tại");
+				else return BResult.Failure("Không Thành Công, Xem Lại Thông Tin Đã nhập: imei có bị trùng ...");
+
 			}
 			return BResult.Success();
 		}

@@ -15,12 +15,12 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
 {
 	public class UpdateLte4gPatchCommand : IRequest<BResult>
 	{
-		public UpdateLte4gPatchCommand(int id, JsonPatchDocument requestPatch)
+		public UpdateLte4gPatchCommand(string imei, JsonPatchDocument requestPatch)
 		{
-			Id = id;
+			Imei = imei;
 			RequestPatch = requestPatch;
 		}
-		public int Id { get; set; }
+		public string Imei { get; set; }
 		public JsonPatchDocument RequestPatch { get;  set; }
 		//public string Op { get; set; }
 		//public string Path { get; set; }
@@ -41,7 +41,7 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
 		{
 			//var entity = WifiMapper.Mapper.Map<Wifi>(request);
 			
-			await _lte4gRepository.BUpdateTPatchAsync(request.Id, request.RequestPatch);
+			await _lte4gRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 			return BResult.Success();
 		}
 	}

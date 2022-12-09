@@ -9,7 +9,7 @@ namespace DATN.Infastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AccountAdmin",
+                name: "Account",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -25,15 +25,14 @@ namespace DATN.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AccountAdmin", x => x.Id);
+                    table.PrimaryKey("PK_Account", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Device",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Imei = table.Column<string>(type: "text", nullable: false),
                     DeviceName = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
                     EquipmentShop = table.Column<string>(type: "text", nullable: true),
@@ -44,7 +43,6 @@ namespace DATN.Infastructure.Migrations
                     OwnerName = table.Column<string>(type: "text", nullable: true),
                     Address = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: true),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -52,22 +50,20 @@ namespace DATN.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Device", x => x.Id);
+                    table.PrimaryKey("PK_Device", x => x.Imei);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Ethernet",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Imei = table.Column<string>(type: "text", nullable: false),
                     DriverType = table.Column<string>(type: "text", nullable: true),
                     BringUpdownEn = table.Column<string>(type: "text", nullable: true),
                     IpStaticEn = table.Column<string>(type: "text", nullable: true),
                     IpAddr = table.Column<string>(type: "text", nullable: true),
                     DriverEn = table.Column<string>(type: "text", nullable: true),
                     Netmask = table.Column<string>(type: "text", nullable: true),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -75,15 +71,20 @@ namespace DATN.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ethernet", x => x.Id);
+                    table.PrimaryKey("PK_Ethernet", x => x.Imei);
+                    table.ForeignKey(
+                        name: "FK_Ethernet_Device_Imei",
+                        column: x => x.Imei,
+                        principalTable: "Device",
+                        principalColumn: "Imei",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Gps",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Imei = table.Column<string>(type: "text", nullable: false),
                     Latitude = table.Column<string>(type: "text", nullable: true),
                     Longitude = table.Column<string>(type: "text", nullable: true),
                     Altitude = table.Column<string>(type: "text", nullable: true),
@@ -91,7 +92,6 @@ namespace DATN.Infastructure.Migrations
                     Bearing = table.Column<string>(type: "text", nullable: true),
                     Accuracy = table.Column<string>(type: "text", nullable: true),
                     Time = table.Column<string>(type: "text", nullable: true),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -99,15 +99,20 @@ namespace DATN.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gps", x => x.Id);
+                    table.PrimaryKey("PK_Gps", x => x.Imei);
+                    table.ForeignKey(
+                        name: "FK_Gps_Device_Imei",
+                        column: x => x.Imei,
+                        principalTable: "Device",
+                        principalColumn: "Imei",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Lte4g",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Imei = table.Column<string>(type: "text", nullable: false),
                     SimStatus = table.Column<string>(type: "text", nullable: true),
                     SimIccid = table.Column<string>(type: "text", nullable: true),
                     SimImsi = table.Column<string>(type: "text", nullable: true),
@@ -122,7 +127,6 @@ namespace DATN.Infastructure.Migrations
                     Afrcn = table.Column<string>(type: "text", nullable: true),
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
                     Rssi4G = table.Column<string>(type: "text", nullable: true),
-                    Imei = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -130,78 +134,57 @@ namespace DATN.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lte4g", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StationWifi",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StaIp = table.Column<string>(type: "text", nullable: true),
-                    StaSsidExt = table.Column<string>(type: "text", nullable: true),
-                    StaSecurity = table.Column<string>(type: "text", nullable: true),
-                    StaProtocol = table.Column<string>(type: "text", nullable: true),
-                    StaPassword = table.Column<int>(type: "integer", nullable: false),
-                    Imei = table.Column<string>(type: "text", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
-                    TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    TimingDelete = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StationWifi", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Age = table.Column<int>(type: "integer", nullable: false),
-                    Phone = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Address = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    Imei = table.Column<string>(type: "text", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
-                    TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    TimingDelete = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Lte4g", x => x.Imei);
+                    table.ForeignKey(
+                        name: "FK_Lte4g_Device_Imei",
+                        column: x => x.Imei,
+                        principalTable: "Device",
+                        principalColumn: "Imei",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Wifi",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ClientCount = table.Column<int>(type: "integer", nullable: false),
+                    Imei = table.Column<string>(type: "text", nullable: false),
                     WifiOpen = table.Column<string>(type: "text", nullable: true),
                     WifiMode = table.Column<string>(type: "text", nullable: true),
                     CurrentAp = table.Column<string>(type: "text", nullable: true),
                     WifiNat = table.Column<string>(type: "text", nullable: true),
-                    Ssid = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    AuthPwd = table.Column<string>(type: "text", nullable: true),
-                    BroadCast = table.Column<string>(type: "text", nullable: true),
-                    Isolation = table.Column<string>(type: "text", nullable: true),
-                    MacAddress = table.Column<string>(type: "text", nullable: true),
-                    AuthType = table.Column<string>(type: "text", nullable: true),
-                    EncryptMode = table.Column<string>(type: "text", nullable: true),
-                    Channel = table.Column<string>(type: "text", nullable: true),
-                    ChannelMode = table.Column<string>(type: "text", nullable: true),
-                    DhcpHostIp = table.Column<string>(type: "text", nullable: true),
-                    DhcpStartIp = table.Column<string>(type: "text", nullable: true),
-                    DhcpEndIp = table.Column<string>(type: "text", nullable: true),
-                    DhcpTime = table.Column<string>(type: "text", nullable: true),
-                    Imei = table.Column<string>(type: "text", nullable: true),
+                    SsidWifi1 = table.Column<string>(type: "text", nullable: true),
+                    AuthTypeWifi1 = table.Column<string>(type: "text", nullable: true),
+                    EncryptModeWifi1 = table.Column<string>(type: "text", nullable: true),
+                    AuthPwdWifi1 = table.Column<string>(type: "text", nullable: true),
+                    ClientCountWifi1 = table.Column<string>(type: "text", nullable: true),
+                    BroadCastWifi1 = table.Column<string>(type: "text", nullable: true),
+                    IsolationWifi1 = table.Column<string>(type: "text", nullable: true),
+                    MacAddressWifi1 = table.Column<string>(type: "text", nullable: true),
+                    ChannelModeWifi1 = table.Column<string>(type: "text", nullable: true),
+                    ChannelWifi1 = table.Column<string>(type: "text", nullable: true),
+                    DhcpHostIpWifi1 = table.Column<string>(type: "text", nullable: true),
+                    DhcpStartIpWifi1 = table.Column<string>(type: "text", nullable: true),
+                    DhcpEndIpWifi1 = table.Column<string>(type: "text", nullable: true),
+                    DhcpTimeWifi1 = table.Column<string>(type: "text", nullable: true),
+                    SsidWifi2 = table.Column<string>(type: "text", nullable: true),
+                    AuthTypeWifi2 = table.Column<string>(type: "text", nullable: true),
+                    EncryptModeWifi2 = table.Column<string>(type: "text", nullable: true),
+                    AuthPwdWifi2 = table.Column<string>(type: "text", nullable: true),
+                    ClientCountWifi2 = table.Column<string>(type: "text", nullable: true),
+                    BroadCastWifi2 = table.Column<string>(type: "text", nullable: true),
+                    IsolationWifi2 = table.Column<string>(type: "text", nullable: true),
+                    MacAddressWifi2 = table.Column<string>(type: "text", nullable: true),
+                    ChannelModeWifi2 = table.Column<string>(type: "text", nullable: true),
+                    ChannelWifi2 = table.Column<string>(type: "text", nullable: true),
+                    DhcpHostIpWifi2 = table.Column<string>(type: "text", nullable: true),
+                    DhcpStartIpWifi2 = table.Column<string>(type: "text", nullable: true),
+                    DhcpEndIpWifi2 = table.Column<string>(type: "text", nullable: true),
+                    DhcpTimeWifi2 = table.Column<string>(type: "text", nullable: true),
+                    StaIp = table.Column<string>(type: "text", nullable: true),
+                    StaSsidExt = table.Column<string>(type: "text", nullable: true),
+                    StaSecurity = table.Column<string>(type: "text", nullable: true),
+                    StaProtocol = table.Column<string>(type: "text", nullable: true),
+                    StaPassword = table.Column<string>(type: "text", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     TimingCreate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     TimingUpdate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -209,17 +192,20 @@ namespace DATN.Infastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Wifi", x => x.Id);
+                    table.PrimaryKey("PK_Wifi", x => x.Imei);
+                    table.ForeignKey(
+                        name: "FK_Wifi_Device_Imei",
+                        column: x => x.Imei,
+                        principalTable: "Device",
+                        principalColumn: "Imei",
+                        onDelete: ReferentialAction.Cascade);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AccountAdmin");
-
-            migrationBuilder.DropTable(
-                name: "Device");
+                name: "Account");
 
             migrationBuilder.DropTable(
                 name: "Ethernet");
@@ -231,13 +217,10 @@ namespace DATN.Infastructure.Migrations
                 name: "Lte4g");
 
             migrationBuilder.DropTable(
-                name: "StationWifi");
-
-            migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
                 name: "Wifi");
+
+            migrationBuilder.DropTable(
+                name: "Device");
         }
     }
 }

@@ -15,12 +15,12 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
 {
 	public class UpdateEthernetPatchCommand : IRequest<BResult>
 	{
-		public UpdateEthernetPatchCommand(int id, JsonPatchDocument requestPatch)
+		public UpdateEthernetPatchCommand(string imei, JsonPatchDocument requestPatch)
 		{
-			Id = id;
+			Imei = imei;
 			RequestPatch = requestPatch;
 		}
-		public int Id { get; set; }
+		public string Imei { get; set; }
 		public JsonPatchDocument RequestPatch { get;  set; }
 		//public string Op { get; set; }
 		//public string Path { get; set; }
@@ -41,7 +41,7 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
 		{
 			//var entity = EthernetMapper.Mapper.Map<Ethernet>(request);
 			
-			await _ethernetRepository.BUpdateTPatchAsync(request.Id, request.RequestPatch);
+			await _ethernetRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 			return BResult.Success();
 		}
 	}

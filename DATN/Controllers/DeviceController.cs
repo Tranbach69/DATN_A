@@ -1,11 +1,7 @@
 ﻿using DATN.Application.DeviceHandler.Commands.CreateDevice;
 using DATN.Application.DeviceHandler.Commands.DeleteDevice;
 using DATN.Application.DeviceHandler.Commands.UpdateDevice;
-using DATN.Application.DeviceHandler.Queries.GetAllDeviceUser;
-
 using DATN.Application.DeviceHandler.Queries.GetDevice;
-using DATN.Application.DeviceHandler.Queries.GetDeviceByImei;
-using DATN.Application.DeviceHandler.Queries.GetDeviceByMultipleImei;
 using DATN.Application.DeviceHandler.Queries.GetDevicePaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -39,38 +35,23 @@ namespace DATN.Api.Controllers
 			var result = await _mediator.Send(command);
 			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
-		[HttpGet("deviceUserList")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Get([FromQuery] GetDevicesWithUserInfoQuery queries)
-		{
-			var result = await _mediator.Send(queries);
-			return Ok(result);
-		}
+		//[HttpGet("deviceUserList")]
+		//[ProducesResponseType(StatusCodes.Status200OK)]
+		//public async Task<ActionResult<bool>> Get([FromQuery] GetDevicesWithUserInfoQuery queries)
+		//{
+		//	var result = await _mediator.Send(queries);
+		//	return Ok(result);
+		//}
 
-		[HttpGet("{id:int}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Get(int id)
-		{
-			var query = new GetDeviceQuery(id);
-			var result = await _mediator.Send(query);
-			return Ok(result);
-		}
-		[HttpGet("/api/device/imei{imei}")]
+		[HttpGet("{imei}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
-			var query = new GetDeviceByImeiQuery(imei);
+			var query = new GetDeviceQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}
-		[HttpGet("/api/devive/mutipleImei{imei}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
-		{
-			var query = new GetDeviceMultipleImeiQuery(imei);
-			var result = await _mediator.Send(query);
-			return Ok(result);
-		}
+
 
 
 		[HttpGet]
@@ -81,20 +62,20 @@ namespace DATN.Api.Controllers
 			return Ok(result);
 		}
 
-		[HttpDelete("{id:int}")]
+		[HttpDelete("{imei}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Delete(int id)
+		public async Task<ActionResult<bool>> Delete(string imei)
 		{
-			var query = new DeleteDeviceCommand(id);
+			var query = new DeleteDeviceCommand(imei);
 			var result = await _mediator.Send(query);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 		[HttpPatch]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateDevicePatchCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 	}
 }

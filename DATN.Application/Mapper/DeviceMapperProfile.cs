@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using DATN.Application.DeviceHandler.Commands.CreateDevice;
 using DATN.Application.DeviceHandler.Commands.UpdateDevice;
-
 using DATN.Application.DeviceHandler.Queries.GetDevice;
-using DATN.Application.DeviceHandler.Queries.GetDeviceByImei;
-using DATN.Application.DeviceHandler.Queries.GetDeviceByMultipleImei;
 using DATN.Application.DeviceHandler.Queries.GetDevicePaging;
 using DATN.Core.Entities;
 using System;
@@ -23,8 +20,7 @@ namespace DATN.Application.Mapper
             CreateMap<Device, UpdateDeviceCommand>().ReverseMap();
             CreateMap<Device, GetDeviceResponse>().ReverseMap();
             CreateMap<Device, GetDevicePagingResponse>().ReverseMap();
-            CreateMap<Device, GetDeviceByImeiResponse>().ReverseMap();
-            CreateMap<Device, GetDeviceMultipleImeiResponse>().ReverseMap();
+
         }
     }
 }

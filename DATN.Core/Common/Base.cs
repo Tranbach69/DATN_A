@@ -8,7 +8,6 @@ namespace DATN.Core.Common
 {
 	public class Base
 	{
-		public int Id { get; set; }
 		public string Imei { get; set; }
 		public bool IsDeleted { get; set; }
 		public DateTime TimingCreate { get; set; }

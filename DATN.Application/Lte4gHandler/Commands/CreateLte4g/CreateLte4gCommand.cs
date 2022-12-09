@@ -46,7 +46,16 @@ namespace DATN.Application.Lte4gHandler.Commands.CreateLte4g
 		public async Task<BResult> Handle(CreateLte4gCommand request, CancellationToken cancellationToken)
 		{
 			var entity = Lte4gMapper.Mapper.Map<Lte4g>(request);
-			await _Lte4gRepository.BAddAsync(entity);
+			var result = await _Lte4gRepository.BAddAsync(entity);
+			if (result == null)
+			{
+				if (request.Imei == "")
+				{
+					return BResult.Failure("Imei phải có giá trị");
+				}
+				else return BResult.Failure("Không Thành Công, Xem Lại Thông Tin Đã nhập: imei có bị trùng không...");
+
+			}
 			return BResult.Success();
 		}
 	}

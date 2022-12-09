@@ -4,9 +4,11 @@ using DATN.Core.Entities;
 using DATN.Infastructure.Repositories.EthernetRepository;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +17,6 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
 {
     public class UpdateEthernetCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string DriverType { get; set; }
         public string BringUpdownEn { get; set; }
@@ -23,10 +24,7 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
         public string IpAddr { get; set; }
         public string DriverEn { get; set; }
         public string Netmask { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime TimingCreate { get; set; }
-        public DateTime TimingUpdate { get; set; }
-        public DateTime TimingDelete { get; set; }
+
 
     }
 
@@ -42,7 +40,32 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
         public async Task<BResult> Handle(UpdateEthernetCommand request, CancellationToken cancellationToken)
         {
             var entity = EthernetMapper.Mapper.Map<Ethernet>(request);
-            await _ethernetRepository.BUpdateAsync(entity);
+            var result = await _ethernetRepository.BUpdateAsync(entity);
+            if (result == null)
+            {
+                if (request.Imei == "")
+                {
+                    return BResult.Failure("Imei phải có giá trị");
+                }
+                else return BResult.Failure("Imei không tồn tại");
+
+            }
+            const int PORT_NO = 3023;
+            const string SERVER_IP = "localhost";
+
+            string s =  "2"+ JsonConvert.SerializeObject(request);
+
+            string textToSend = s;
+
+ 
+            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
+            NetworkStream nwStream = client.GetStream();
+            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
+
+ 
+            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+
+            client.Close();
             return BResult.Success();
         }
     }

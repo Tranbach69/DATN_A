@@ -24,6 +24,12 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         {
             entity.TimingCreate = System.DateTime.Now;
             entity.IsDeleted = false;
+            //if (entity.Imei == "") return null;
+            //var a = await _context.Set<T>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei)&&a.IsDeleted.Equals(entity.IsDeleted));
+            //if (a != null)
+            //{
+            //    return null;
+            //}
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
@@ -37,12 +43,21 @@ namespace DATN.Infastructure.Repositories.BaseRepository
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
-        public async Task BDeleteByIdAsync(int id)
+
+        public async Task<T> BDeleteByImeiAsync(string imei)
         {
-            var entity = await _context.Set<T>().FindAsync(id);
-            entity.IsDeleted = true;
-            _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var entity = await _context.Set<T>().FindAsync(imei);
+            if (entity != null) {
+                if (entity.IsDeleted == false)
+                {
+                    entity.IsDeleted = true;
+                    _context.Entry(entity).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    return entity;
+                }else return null;
+            }else  return null; 
+
+
         }
         public async Task BDeleteAsync(Expression<Func<T, bool>> predicate)
         {
@@ -58,26 +73,31 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         #endregion
 
         #region update
-        public async Task BUpdateAsync(T entity)
+        public async Task<T> BUpdateAsync(T entity)
         {
             entity.TimingUpdate = System.DateTime.Now;
             entity.IsDeleted = false;
+            if (entity.Imei == "") return null;
             _context.Entry(entity).State = EntityState.Modified;
+            var a = await _context.Set<T>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei));
+            if (a == null)
+            {
+                return null;
+            }
             await _context.SaveChangesAsync();
+            return entity;
         }
 
-		public async Task BUpdateTPatchAsync(int id, JsonPatchDocument TModel)
-		{
-            var entity = await _context.Set<T>().FindAsync(id);
-            
+        public async Task BUpdateTPatchImeiAsync(string imei, JsonPatchDocument TModel)
+        {
+            var entity = await _context.Set<T>().FindAsync(imei);
+
             entity.IsDeleted = false;
             if (entity != null)
             {
                 TModel.ApplyTo(entity);
                 await _context.SaveChangesAsync();
             }
-            //_context.Entry(entity).State = EntityState.Modified;
-            //await _context.SaveChangesAsync();
         }
         #endregion
 
@@ -124,20 +144,6 @@ namespace DATN.Infastructure.Repositories.BaseRepository
             return await _context.Set<T>().Where(a => a.IsDeleted == false).CountAsync();
         }
  
-
-
-
-        public async Task<T> BGetByIdAsync(int id)
-        {
-            var entity = await _context.Set<T>().FirstOrDefaultAsync(t => t.Id.Equals(id));
-            _context.Entry(entity).State = EntityState.Detached;
-            if (entity?.IsDeleted == true)
-            {
-                return null;
-            }
-            return entity;
-        }
-        //Bach custom
         public async Task<T> BGetByImeiAsync(string imei)
         {
             var entity = await _context.Set<T>().FirstOrDefaultAsync(t => t.Imei.Equals(imei));

@@ -4,9 +4,11 @@ using DATN.Core.Entities;
 using DATN.Infastructure.Repositories.GpsRepository;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +17,6 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 {
     public class UpdateGpsCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
@@ -24,10 +25,7 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
         public string Bearing { get; set; }
         public string Accuracy { get; set; }
         public string Time { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime TimingCreate { get; set; }
-        public DateTime TimingUpdate { get; set; }
-        public DateTime TimingDelete { get; set; }
+
     }
 
     public class UpdateGpsCommandHandler : IRequestHandler<UpdateGpsCommand, BResult>
@@ -42,7 +40,32 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
         public async Task<BResult> Handle(UpdateGpsCommand request, CancellationToken cancellationToken)
         {
             var entity = GpsMapper.Mapper.Map<Gps>(request);
-            await _gpsRepository.BUpdateAsync(entity);
+            var result = await _gpsRepository.BUpdateAsync(entity);
+            if (result == null)
+            {
+                if (request.Imei == "")
+                {
+                    return BResult.Failure("Imei phải có giá trị");
+                }
+                else return BResult.Failure("Imei không tồn tại");
+
+            }
+            const int PORT_NO = 3023;
+            const string SERVER_IP = "localhost";
+
+            string s = "3"+JsonConvert.SerializeObject(request);
+            //---data to send to the server---
+            string textToSend = s;
+
+            //---create a TCPClient object at the IP and port no.---
+            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
+            NetworkStream nwStream = client.GetStream();
+            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
+
+            //---send the text---
+            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+
+            client.Close();
             return BResult.Success();
         }
     }

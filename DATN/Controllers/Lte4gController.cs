@@ -2,8 +2,7 @@
 using DATN.Application.Lte4gHandler.Commands.DeleteLte4g;
 using DATN.Application.Lte4gHandler.Commands.UpdateLte4g;
 using DATN.Application.Lte4gHandler.Queries.GetLte4g;
-using DATN.Application.Lte4gHandler.Queries.GetLte4gByImei;
-using DATN.Application.Lte4gHandler.Queries.GetLte4gByMultipleImei;
+
 using DATN.Application.Lte4gHandler.Queries.GetLte4gPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +26,7 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Create([FromBody] CreateLte4gCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
 		[HttpPut]
@@ -35,57 +34,40 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> ChangePassword([FromBody] UpdateLte4gCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
-		[HttpGet("{id:int}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Get(int id)
-		{
-			var query = new GetLte4gQuery(id);
-			var result = await _mediator.Send(query);
-			return Ok(result);
-		}
-		[HttpGet("/api/lte4g/imei{imei}")]
+		[HttpGet("{imei}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
-			var query = new GetLte4gByImeiQuery(imei);
+			var query = new GetLte4gQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}
-		[HttpGet("/api/lte4g/mutipleImei{imei}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
-		{
-			var query = new GetLte4gMultipleImeiQuery(imei);
-			var result = await _mediator.Send(query);
-			return Ok(result);
-		}
-
 
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> Get([FromQuery] GetLte4gPagingQuery queries)
 		{
 			var result = await _mediator.Send(queries);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
-		[HttpDelete("{id:int}")]
+		[HttpDelete("{imei}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Delete(int id)
+		public async Task<ActionResult<bool>> Delete(string imei)
 		{
-			var query = new DeleteLte4gCommand(id);
+			var query = new DeleteLte4gCommand(imei);
 			var result = await _mediator.Send(query);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 		[HttpPatch]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateLte4gPatchCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 	}
 }

@@ -16,6 +16,8 @@ namespace DATN.Core.Entities
 		public string Bearing { get; set; }
 		public string Accuracy { get; set; }
 		public string Time { get; set; }
+		public Device Device { get; set; }
+
 
 	}
 }

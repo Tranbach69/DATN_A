@@ -19,5 +19,9 @@ namespace DATN.Core.Entities
 		public string OwnerName { get; set; }
 		public string Address { get; set; }
 		public string Email { get; set; }
+		public Wifi Wifi { get; set; }
+		public Ethernet Ethernet { get; set; }
+		public Lte4g Lte4g { get; set; }
+		public Gps Gps { get; set; }
 	}
 }

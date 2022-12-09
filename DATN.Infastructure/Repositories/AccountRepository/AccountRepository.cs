@@ -1,6 +1,7 @@
 ﻿using DATN.Core.Entities;
 using DATN.Infastructure.Persistence;
 using DATN.Infastructure.Repositories.BaseRepository;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -78,6 +79,34 @@ namespace DATN.Infastructure.Repositories.AccountRepository
 				}
 			}
 			await _context.SaveChangesAsync();
+            return entity;
+        }
+        public async Task DeleteAccountByIdAsync(int id)
+        {
+            var entity = await _context.Set<Account>().FindAsync(id);
+            entity.IsDeleted = true;
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+        public async Task UpdateAccountPatchAsync(int id, JsonPatchDocument TModel)
+        {
+            var entity = await _context.Set<Account>().FindAsync(id);
+
+            entity.IsDeleted = false;
+            if (entity != null)
+            {
+                TModel.ApplyTo(entity);
+                await _context.SaveChangesAsync();
+            }
+        }
+        public async Task<Account> GetAccountByIdAsync(int id)
+        {
+            var entity = await _context.Set<Account>().FirstOrDefaultAsync(t => t.Id.Equals(id));
+            _context.Entry(entity).State = EntityState.Detached;
+            if (entity?.IsDeleted == true)
+            {
+                return null;
+            }
             return entity;
         }
     }

@@ -15,7 +15,7 @@ namespace DATN.Infastructure.Persistence.Configurations
 			modelBuilder.Entity<Device>(e =>
 			{
 				e.ToTable("Device");
-				e.HasKey(e => e.Id);
+				e.HasKey(e => e.Imei);
 		});
         }
     }

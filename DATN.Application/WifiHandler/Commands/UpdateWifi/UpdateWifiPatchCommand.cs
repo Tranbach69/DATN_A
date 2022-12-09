@@ -15,12 +15,12 @@ namespace DATN.Application.WifiHandler.Commands.UpdateWifi
 {
 	public class UpdateWifiPatchCommand : IRequest<BResult>
 	{
-		public UpdateWifiPatchCommand(int id, JsonPatchDocument requestPatch)
+		public UpdateWifiPatchCommand(string imei, JsonPatchDocument requestPatch)
 		{
-			Id = id;
+			Imei = imei;
 			RequestPatch = requestPatch;
 		}
-		public int Id { get; set; }
+		public string Imei { get; set; }
 		public JsonPatchDocument RequestPatch { get;  set; }
 		//public string Op { get; set; }
 		//public string Path { get; set; }
@@ -41,7 +41,7 @@ namespace DATN.Application.WifiHandler.Commands.UpdateWifi
 		{
 			//var entity = WifiMapper.Mapper.Map<Wifi>(request);
 			
-			await _wifiRepository.BUpdateTPatchAsync(request.Id, request.RequestPatch);
+			await _wifiRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 			return BResult.Success();
 		}
 	}

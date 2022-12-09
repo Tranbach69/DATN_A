@@ -10,5 +10,6 @@ namespace DATN.Infastructure.Repositories.EthernetRepository
 {
 	public interface IEthernetRepository : IRepository<Ethernet>
 	{
+	//Task<Ethernet> AddEthernetAsync(Ethernet entity);
 	}
 }

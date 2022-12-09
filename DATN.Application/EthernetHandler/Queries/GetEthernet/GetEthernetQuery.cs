@@ -12,16 +12,15 @@ namespace DATN.Application.EthernetHandler.Queries.GetEthernet
 {
     public class GetEthernetQuery : IRequest<GetEthernetResponse>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public GetEthernetQuery(int id)
+        public GetEthernetQuery(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
     public class GetEthernetResponse
     {
-        public int Id { get; set; }
         public string Imei { get; set; }
         public string DriverType { get; set; }
         public string BringUpdownEn { get; set; }
@@ -46,7 +45,7 @@ namespace DATN.Application.EthernetHandler.Queries.GetEthernet
 
         public async Task<GetEthernetResponse> Handle(GetEthernetQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _EthernetRepository.BGetByIdAsync(request.Id);
+            var entity = await _EthernetRepository.BGetByImeiAsync(request.Imei);
             var result = EthernetMapper.Mapper.Map<GetEthernetResponse>(entity);
             return result;
 

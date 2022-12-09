@@ -12,40 +12,61 @@ namespace DATN.Application.WifiHandler.Queries.GetWifi
 {
     public class GetWifiQuery : IRequest<GetWifiResponse>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public GetWifiQuery(int id)
+        public GetWifiQuery(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
     public class GetWifiResponse
     {
-        public int Id { get; set; }
-        public int ClientCount { get; set; }
-        public string Imei { get; set; }
-        public string WifiOpen { get; set; }
-        public string WifiMode { get; set; }
-        public string CurrentAp { get; set; }
-        public string WifiNat { get; set; }
-        public string Ssid { get; set; }
-        public string AuthPwd { get; set; }
-        public string BroadCast { get; set; }
-        public string Isolation { get; set; }
-        public string MacAddress { get; set; }
-        public string AuthType { get; set; }
-        public string EncryptMode { get; set; }
-        public string Channel { get; set; }
-        public string ChannelMode { get; set; }
-        public string DhcpHostIp { get; set; }
-        public string DhcpStartIp { get; set; }
-        public string DhcpEndIp { get; set; }
-        public string DhcpTime { get; set; }
-        public bool IsDeleted { get; set; }
-        public DateTime TimingCreate { get; set; }
-        public DateTime TimingUpdate { get; set; }
-        public DateTime TimingDelete { get; set; }
-    }
+		public string Imei { get; set; }
+		public string WifiOpen { get; set; }
+		public string WifiMode { get; set; }
+		public string CurrentAp { get; set; }
+		public string WifiNat { get; set; }
+
+		public string SsidWifi1 { get; set; }
+		public string AuthTypeWifi1 { get; set; }
+		public string EncryptModeWifi1 { get; set; }
+		public string AuthPwdWifi1 { get; set; }
+		public string ClientCountWifi1 { get; set; }
+		public string BroadCastWifi1 { get; set; }
+		public string IsolationWifi1 { get; set; }
+		public string MacAddressWifi1 { get; set; }
+		public string ChannelModeWifi1 { get; set; }
+		public string ChannelWifi1 { get; set; }
+		public string DhcpHostIpWifi1 { get; set; }
+		public string DhcpStartIpWifi1 { get; set; }
+		public string DhcpEndIpWifi1 { get; set; }
+		public string DhcpTimeWifi1 { get; set; }
+
+		public string SsidWifi2 { get; set; }
+		public string AuthTypeWifi2 { get; set; }
+		public string EncryptModeWifi2 { get; set; }
+		public string AuthPwdWifi2 { get; set; }
+		public string ClientCountWifi2 { get; set; }
+		public string BroadCastWifi2 { get; set; }
+		public string IsolationWifi2 { get; set; }
+		public string MacAddressWifi2 { get; set; }
+		public string ChannelModeWifi2 { get; set; }
+		public string ChannelWifi2 { get; set; }
+		public string DhcpHostIpWifi2 { get; set; }
+		public string DhcpStartIpWifi2 { get; set; }
+		public string DhcpEndIpWifi2 { get; set; }
+		public string DhcpTimeWifi2 { get; set; }
+
+		public string StaIp { get; set; }
+		public string StaSsidExt { get; set; }
+		public string StaSecurity { get; set; }
+		public string StaProtocol { get; set; }
+		public string StaPassword { get; set; }
+		public bool IsDeleted { get; set; }
+		public DateTime TimingCreate { get; set; }
+		public DateTime TimingUpdate { get; set; }
+		public DateTime TimingDelete { get; set; }
+	}
 
     public class GetWifiQueryHandler : IRequestHandler<GetWifiQuery, GetWifiResponse>
     {
@@ -58,7 +79,7 @@ namespace DATN.Application.WifiHandler.Queries.GetWifi
 
         public async Task<GetWifiResponse> Handle(GetWifiQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _wifiRepository.BGetByIdAsync(request.Id);
+            var entity = await _wifiRepository.BGetByImeiAsync(request.Imei);
             var result = WifiMapper.Mapper.Map<GetWifiResponse>(entity);
             return result;
 

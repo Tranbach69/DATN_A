@@ -2,8 +2,6 @@
 using DATN.Application.GpsHandler.Commands.DeleteGps;
 using DATN.Application.GpsHandler.Commands.UpdateGps;
 using DATN.Application.GpsHandler.Queries.GetGps;
-using DATN.Application.GpsHandler.Queries.GetGpsByImei;
-using DATN.Application.GpsHandler.Queries.GetGpsByMultipleImei;
 using DATN.Application.GpsHandler.Queries.GetGpsPaging;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +25,7 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Create([FromBody] CreateGpsCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
 		[HttpPut]
@@ -35,30 +33,14 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> ChangePassword([FromBody] UpdateGpsCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
-		[HttpGet("{id:int}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Get(int id)
-		{
-			var query = new GetGpsQuery(id);
-			var result = await _mediator.Send(query);
-			return Ok(result);
-		}
-		[HttpGet("/api/gps/imei{imei}")]
+		[HttpGet("{imei}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> Get(string imei)
 		{
-			var query = new GetGpsByImeiQuery(imei);
-			var result = await _mediator.Send(query);
-			return Ok(result);
-		}
-		[HttpGet("/api/gps/mutipleImei{imei}")]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> GetMultipleImei(string imei)
-		{
-			var query = new GetGpsMultipleImeiQuery(imei);
+			var query = new GetGpsQuery(imei);
 			var result = await _mediator.Send(query);
 			return Ok(result);
 		}
@@ -68,23 +50,23 @@ namespace DATN.Api.Controllers
 		public async Task<ActionResult<bool>> Get([FromQuery] GetGpsPagingQuery queries)
 		{
 			var result = await _mediator.Send(queries);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 
-		[HttpDelete("{id:int}")]
+		[HttpDelete("{imei}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<bool>> Delete(int id)
+		public async Task<ActionResult<bool>> Delete(string imei)
 		{
-			var query = new DeleteGpsCommand(id);
+			var query = new DeleteGpsCommand(imei);
 			var result = await _mediator.Send(query);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 		[HttpPatch]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		public async Task<ActionResult<bool>> UpdatePatch([FromBody] UpdateGpsPatchCommand command)
 		{
 			var result = await _mediator.Send(command);
-			return Ok(result);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
 	}
 }

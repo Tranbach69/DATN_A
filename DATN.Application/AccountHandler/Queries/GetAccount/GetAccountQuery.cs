@@ -44,7 +44,7 @@ namespace DATN.Application.AccountHandler.Queries.GetAccount
 
         public async Task<GetAccountResponse> Handle(GetAccountQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _accRepository.BGetByIdAsync(request.Id);
+            var entity = await _accRepository.GetAccountByIdAsync(request.Id);
             var result = AccountMapper.Mapper.Map<GetAccountResponse>(entity);
             return result;
 

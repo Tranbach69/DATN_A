@@ -1,10 +1,6 @@
 ﻿using DATN.Application.Models;
 using DATN.Infastructure.Repositories.WifiRepository;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,11 +8,11 @@ namespace DATN.Application.WifiHandler.Commands.DeleteWifi
 {
     public class DeleteWifiCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public DeleteWifiCommand(int id)
+        public DeleteWifiCommand(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
 
@@ -31,7 +27,11 @@ namespace DATN.Application.WifiHandler.Commands.DeleteWifi
 
         public async Task<BResult> Handle(DeleteWifiCommand request, CancellationToken cancellationToken)
         {
-            await _WifiRepository.BDeleteByIdAsync(request.Id);
+            var result = await _WifiRepository.BDeleteByImeiAsync(request.Imei);
+            if (result == null)
+            {
+                return BResult.Failure("imei không tồn tại");
+            }
             return BResult.Success();
         }
     }

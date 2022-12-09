@@ -13,7 +13,7 @@ namespace DATN.Infastructure.Persistence.Configurations
         public static void AccountConfigTable(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(e => {
-                e.ToTable("AccountAdmin");
+                e.ToTable("Account");
             });
 
         }

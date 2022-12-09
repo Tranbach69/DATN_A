@@ -18,28 +18,22 @@ namespace DATN.Infastructure.Persistence
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
-			modelBuilder.UserConfigTable();
 			modelBuilder.WifiConfigTable();
 			modelBuilder.EthernetConfigTable();
 			modelBuilder.Lte4gConfigTable();
 			modelBuilder.GpsConfigTable();
 			modelBuilder.DeviceConfigTable();
 			modelBuilder.AccountConfigTable();
-			modelBuilder.StationWifiConfigTable();
 
 			//modelBuilder.SeedInitial();
 		}
 
 		public DbSet<Device> Devices  => Set<Device>();
-		public DbSet<User> Users => Set<User>();
-		
 		public DbSet<Wifi> Wifis => Set<Wifi>();
 		public DbSet<Ethernet> Ethernets => Set<Ethernet>();
 		public DbSet<Lte4g> Lte4gs => Set<Lte4g>();
 		public DbSet<Gps> Gpss => Set<Gps>();
-		
 		public DbSet<Account> Accounts => Set<Account>();
-		public DbSet<StationWifi> StationWifis => Set<StationWifi>();
 
 		//public object Device { get; internal set; }
 	}

@@ -2,8 +2,6 @@
 using DATN.Application.EthernetHandler.Commands.CreateEthernet;
 using DATN.Application.EthernetHandler.Commands.UpdateEthernet;
 using DATN.Application.EthernetHandler.Queries.GetEthernet;
-using DATN.Application.EthernetHandler.Queries.GetEthernetByImei;
-using DATN.Application.EthernetHandler.Queries.GetEthernetByMultipleImei;
 using DATN.Application.EthernetHandler.Queries.GetEthernetPaging;
 using DATN.Core.Entities;
 using System;
@@ -22,8 +20,7 @@ namespace DATN.Application.Mapper
 			CreateMap<Ethernet, UpdateEthernetCommand>().ReverseMap();
 			CreateMap<Ethernet, GetEthernetResponse>().ReverseMap();
             CreateMap<Ethernet, GetEthernetPagingResponse>().ReverseMap();
-            CreateMap<Ethernet, GetEthernetByImeiResponse>().ReverseMap();
-            CreateMap<Ethernet, GetEthernetMultipleImeiResponse>().ReverseMap();
+
         }
     }
 }

@@ -12,11 +12,11 @@ namespace DATN.Application.EthernetHandler.Commands.DeleteEthernet
 {
     public class DeleteEthernetCommand : IRequest<BResult>
     {
-        public int Id { get; set; }
+        public string Imei { get; set; }
 
-        public DeleteEthernetCommand(int id)
+        public DeleteEthernetCommand(string imei)
         {
-            Id = id;
+            Imei = imei;
         }
     }
 
@@ -31,7 +31,11 @@ namespace DATN.Application.EthernetHandler.Commands.DeleteEthernet
 
         public async Task<BResult> Handle(DeleteEthernetCommand request, CancellationToken cancellationToken)
         {
-            await _EthernetRepository.BDeleteByIdAsync(request.Id);
+            var result = await _EthernetRepository.BDeleteByImeiAsync(request.Imei);
+            if (result == null)
+            {
+                return BResult.Failure("imei không tồn tại");
+            }
             return BResult.Success();
         }
     }
