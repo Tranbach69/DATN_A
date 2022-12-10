@@ -23,12 +23,6 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         public async Task<T> BAddAsync(T entity)
         {
             entity.TimingCreate = System.DateTime.Now;
-            var a = await _context.Set<T>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei) && a.IsDeleted.Equals(entity.IsDeleted));
-            if (a != null)
-            {
-
-                return null;
-            }
             entity.IsDeleted = false;
 			if (entity.Imei == "") return null;
 
