@@ -23,14 +23,16 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         public async Task<T> BAddAsync(T entity)
         {
             entity.TimingCreate = System.DateTime.Now;
+            var a = await _context.Set<T>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei) && a.IsDeleted.Equals(entity.IsDeleted));
+            if (a != null)
+            {
+
+                return null;
+            }
             entity.IsDeleted = false;
-            //if (entity.Imei == "") return null;
-            //var a = await _context.Set<T>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei)&&a.IsDeleted.Equals(entity.IsDeleted));
-            //if (a != null)
-            //{
-            //    return null;
-            //}
-            await _context.Set<T>().AddAsync(entity);
+			if (entity.Imei == "") return null;
+
+			await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
@@ -86,6 +88,19 @@ namespace DATN.Infastructure.Repositories.BaseRepository
             }
             await _context.SaveChangesAsync();
             return entity;
+        }
+        public async Task<T> BUndoImeiAsync(T entity)
+        {
+            entity.TimingUpdate = System.DateTime.Now;
+            _context.Entry(entity).State = EntityState.Modified;
+            var a = await _context.Set<T>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei) && a.IsDeleted.Equals(entity.IsDeleted));
+            if (a != null)
+            {
+                entity.IsDeleted = false;
+                await _context.SaveChangesAsync();
+                return entity;
+            }
+            return null;
         }
 
         public async Task BUpdateTPatchImeiAsync(string imei, JsonPatchDocument TModel)

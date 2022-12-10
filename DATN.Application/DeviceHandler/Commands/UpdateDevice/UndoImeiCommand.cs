@@ -4,12 +4,15 @@ using DATN.Core.Entities;
 using DATN.Infastructure.Repositories.DeviceRepository;
 using MediatR;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DATN.Application.DeviceHandler.Commands.UpdateDevice
 {
-    public class UpdateDeviceCommand : IRequest<BResult>
+    public class UndoImeiCommand : IRequest<BResult>
     {
         public string Imei { get; set; }
         public string DeviceName { get; set; }
@@ -28,27 +31,27 @@ namespace DATN.Application.DeviceHandler.Commands.UpdateDevice
         public DateTime TimingDelete { get; set; }
     }
 
-    public class UpdateDeviceCommandHandler : IRequestHandler<UpdateDeviceCommand, BResult>
+    public class UndoImeiCommandHandler : IRequestHandler<UndoImeiCommand, BResult>
     {
         private readonly IDeviceRepository _deviceRepository;
 
-        public UpdateDeviceCommandHandler(IDeviceRepository deviceRepository)
+        public UndoImeiCommandHandler(IDeviceRepository deviceRepository)
         {
             _deviceRepository = deviceRepository;
         }
 
-        public async Task<BResult> Handle(UpdateDeviceCommand request, CancellationToken cancellationToken)
-        {
+        public async Task<BResult> Handle(UndoImeiCommand request, CancellationToken cancellationToken)
+		{
             var entity = DeviceMapper.Mapper.Map<Device>(request);
-            var result = await _deviceRepository.BUpdateAsync(entity);
+            var result = await _deviceRepository.BUndoImeiAsync(entity);
             if (result == null)
             {
-				if (request.Imei == "")
-				{
-					return BResult.Failure("Imei phải có giá trị");
-				}
-				else return BResult.Failure("Imei không tồn tại");
-				
+                //if (request.Imei == "")
+                //{
+                //    return BResult.Failure("Imei phải có giá trị");
+                //}
+                 return BResult.Failure("Imei không tồn tại trong kho");
+
             }
             return BResult.Success();
         }

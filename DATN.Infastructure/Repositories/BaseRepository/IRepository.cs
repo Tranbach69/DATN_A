@@ -23,6 +23,7 @@ namespace DATN.Infastructure.Repositories.BaseRepository
 
         #region update
         Task<T> BUpdateAsync(T entity);
+        Task<T> BUndoImeiAsync(T entity);
         Task BUpdateTPatchImeiAsync(string imei, JsonPatchDocument TModel);
         #endregion
 

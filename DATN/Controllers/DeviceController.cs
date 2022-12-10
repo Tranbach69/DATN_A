@@ -35,6 +35,14 @@ namespace DATN.Api.Controllers
 			var result = await _mediator.Send(command);
 			return result.Succeeded ? Ok(result) : BadRequest(result);
 		}
+
+		[HttpPut("undoImei")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<bool>> UndoImei([FromBody] UndoImeiCommand command)
+		{
+			var result = await _mediator.Send(command);
+			return result.Succeeded ? Ok(result) : BadRequest(result);
+		}
 		//[HttpGet("deviceUserList")]
 		//[ProducesResponseType(StatusCodes.Status200OK)]
 		//public async Task<ActionResult<bool>> Get([FromQuery] GetDevicesWithUserInfoQuery queries)

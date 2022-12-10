@@ -18,6 +18,8 @@ namespace DATN.Application.Mapper
         {
             CreateMap<Device, CreateDeviceCommand>().ReverseMap();           
             CreateMap<Device, UpdateDeviceCommand>().ReverseMap();
+            CreateMap<Device, UndoImeiCommand>().ReverseMap();
+
             CreateMap<Device, GetDeviceResponse>().ReverseMap();
             CreateMap<Device, GetDevicePagingResponse>().ReverseMap();
 

@@ -49,7 +49,7 @@ namespace DATN.Application.DeviceHandler.Commands.CreateDevice
 				{
 					return BResult.Failure("Imei phải có giá trị");
 				}
-				else return BResult.Failure("Không Thành Công, Xem Lại Thông Tin Đã nhập: imei có bị trùng ...");
+				else return BResult.Failure("không thể thêm vì Số imei này đã bị xóa, nếu vẫn muốn thêm số imei này vui lòng thao tác undo imei...");
 
 			}
 			return BResult.Success();
