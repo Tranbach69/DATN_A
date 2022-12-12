@@ -20,12 +20,12 @@ namespace DATN.Application.GpsHandler.Queries.GetGpsPaging
     public class GetGpsPagingResponse
     {
         public string Imei { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
-        public string Altitude { get; set; }
-        public string Speed { get; set; }
-        public string Bearing { get; set; }
-        public string Accuracy { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public double Altitude { get; set; }
+        public float Speed { get; set; }
+        public float Bearing { get; set; }
+        public float Accuracy { get; set; }
         public string Time { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime TimingCreate { get; set; }

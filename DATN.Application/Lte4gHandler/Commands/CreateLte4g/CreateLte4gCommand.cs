@@ -15,21 +15,25 @@ namespace DATN.Application.Lte4gHandler.Commands.CreateLte4g
 	public class CreateLte4gCommand : IRequest<BResult>
 	{
         public string Imei { get; set; }
-        public string SimStatus { get; set; }
-        public string SimIccid { get; set; }
-        public string SimImsi { get; set; }
-        public string SystemMode { get; set; }
-        public string OperationMode { get; set; }
-        public string MobileCountryCode { get; set; }
-        public string MobileNetworkCode { get; set; }
-        public string LocationAreaCode { get; set; }
-        public string ServiceCellId { get; set; }
-        public string FreqBand { get; set; }
-        public string Current4GData { get; set; }
-        public string Afrcn { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Rssi4G { get; set; }
-        public bool IsDeleted { get; set; }
+		public int CardStatus { get; set; }
+		public int Apptype { get; set; }
+		public int AppState { get; set; }
+		public int Pin { get; set; }
+		public string SimIccid { get; set; }
+		public string SimImsi { get; set; }
+		public string SystemMode { get; set; }
+		public string OperationMode { get; set; }
+		public string MobileCountryCode { get; set; }
+		public string MobileNetworkCode { get; set; }
+		public string LocationAreaCode { get; set; }
+		public string ServiceCellId { get; set; }
+		public string FreqBand { get; set; }
+		public string Current4GData { get; set; }
+		public string Afrcn { get; set; }
+		public string PhoneNumber { get; set; }
+		public int Rssi4G { get; set; }
+		public int NetworkMode { get; set; }
+		public bool IsDeleted { get; set; }
         public DateTime TimingCreate { get; set; }
         public DateTime TimingUpdate { get; set; }
         public DateTime TimingDelete { get; set; }

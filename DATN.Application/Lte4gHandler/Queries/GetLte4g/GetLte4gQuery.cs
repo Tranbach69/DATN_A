@@ -22,7 +22,10 @@ namespace DATN.Application.Lte4gHandler.Queries.GetLte4g
     public class GetLte4gResponse
     {
         public string Imei { get; set; }
-        public string SimStatus { get; set; }
+        public int CardStatus { get; set; }
+        public int Apptype { get; set; }
+        public int AppState { get; set; }
+        public int Pin { get; set; }
         public string SimIccid { get; set; }
         public string SimImsi { get; set; }
         public string SystemMode { get; set; }
@@ -35,7 +38,8 @@ namespace DATN.Application.Lte4gHandler.Queries.GetLte4g
         public string Current4GData { get; set; }
         public string Afrcn { get; set; }
         public string PhoneNumber { get; set; }
-        public string Rssi4G { get; set; }
+        public int Rssi4G { get; set; }
+        public int NetworkMode { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime TimingCreate { get; set; }
         public DateTime TimingUpdate { get; set; }

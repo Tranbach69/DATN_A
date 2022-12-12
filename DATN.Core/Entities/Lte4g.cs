@@ -1,15 +1,13 @@
 ﻿using DATN.Core.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DATN.Core.Entities
 {
 	public class Lte4g : Base
 	{
-		public string SimStatus { get; set; }
+		public int CardStatus { get; set; }
+		public int Apptype { get; set; }
+		public int AppState { get; set; }
+		public int Pin { get; set; }
 		public string SimIccid { get; set; }
 		public string SimImsi { get; set; }
 		public string SystemMode { get; set; }
@@ -22,7 +20,8 @@ namespace DATN.Core.Entities
 		public string Current4GData { get; set; }
 		public string Afrcn { get; set; }
 		public string PhoneNumber { get; set; }
-		public string Rssi4G { get; set; }
+		public int Rssi4G { get; set; }
+		public int NetworkMode { get; set; }
 		public Device Device { get; set; }
 
 

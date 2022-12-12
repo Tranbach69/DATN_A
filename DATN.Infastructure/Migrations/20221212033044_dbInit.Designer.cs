@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DATN.Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221209084522_dbInit")]
+    [Migration("20221212033044_dbInit")]
     partial class dbInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,20 +114,20 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("Imei")
                         .HasColumnType("text");
 
-                    b.Property<string>("BringUpdownEn")
-                        .HasColumnType("text");
+                    b.Property<int>("BringUpdownEn")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("DriverEn")
-                        .HasColumnType("text");
+                    b.Property<int>("DriverEn")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("DriverType")
-                        .HasColumnType("text");
+                    b.Property<int>("DriverType")
+                        .HasColumnType("integer");
 
                     b.Property<string>("IpAddr")
                         .HasColumnType("text");
 
-                    b.Property<string>("IpStaticEn")
-                        .HasColumnType("text");
+                    b.Property<int>("IpStaticEn")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
@@ -154,26 +154,26 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("Imei")
                         .HasColumnType("text");
 
-                    b.Property<string>("Accuracy")
-                        .HasColumnType("text");
+                    b.Property<float>("Accuracy")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Altitude")
-                        .HasColumnType("text");
+                    b.Property<double>("Altitude")
+                        .HasColumnType("double precision");
 
-                    b.Property<string>("Bearing")
-                        .HasColumnType("text");
+                    b.Property<float>("Bearing")
+                        .HasColumnType("real");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Latitude")
-                        .HasColumnType("text");
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
 
-                    b.Property<string>("Longitude")
-                        .HasColumnType("text");
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
 
-                    b.Property<string>("Speed")
-                        .HasColumnType("text");
+                    b.Property<float>("Speed")
+                        .HasColumnType("real");
 
                     b.Property<string>("Time")
                         .HasColumnType("text");
@@ -200,6 +200,15 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("Afrcn")
                         .HasColumnType("text");
 
+                    b.Property<int>("AppState")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Apptype")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CardStatus")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Current4GData")
                         .HasColumnType("text");
 
@@ -218,14 +227,20 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("MobileNetworkCode")
                         .HasColumnType("text");
 
+                    b.Property<int>("NetworkMode")
+                        .HasColumnType("integer");
+
                     b.Property<string>("OperationMode")
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
-                    b.Property<string>("Rssi4G")
-                        .HasColumnType("text");
+                    b.Property<int>("Pin")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Rssi4G")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ServiceCellId")
                         .HasColumnType("text");
@@ -234,9 +249,6 @@ namespace DATN.Infastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("SimImsi")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SimStatus")
                         .HasColumnType("text");
 
                     b.Property<string>("SystemMode")
@@ -267,38 +279,38 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("AuthPwdWifi2")
                         .HasColumnType("text");
 
-                    b.Property<string>("AuthTypeWifi1")
-                        .HasColumnType("text");
+                    b.Property<int>("AuthTypeWifi1")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("AuthTypeWifi2")
-                        .HasColumnType("text");
+                    b.Property<int>("AuthTypeWifi2")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("BroadCastWifi1")
-                        .HasColumnType("text");
+                    b.Property<int>("BroadCastWifi1")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("BroadCastWifi2")
-                        .HasColumnType("text");
+                    b.Property<int>("BroadCastWifi2")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("ChannelModeWifi1")
-                        .HasColumnType("text");
+                    b.Property<int>("ChannelModeWifi1")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("ChannelModeWifi2")
-                        .HasColumnType("text");
+                    b.Property<int>("ChannelModeWifi2")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("ChannelWifi1")
-                        .HasColumnType("text");
+                    b.Property<int>("ChannelWifi1")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("ChannelWifi2")
-                        .HasColumnType("text");
+                    b.Property<int>("ChannelWifi2")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("ClientCountWifi1")
-                        .HasColumnType("text");
+                    b.Property<int>("ClientCountWifi1")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("ClientCountWifi2")
-                        .HasColumnType("text");
+                    b.Property<int>("ClientCountWifi2")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("CurrentAp")
-                        .HasColumnType("text");
+                    b.Property<int>("CurrentAp")
+                        .HasColumnType("integer");
 
                     b.Property<string>("DhcpEndIpWifi1")
                         .HasColumnType("text");
@@ -324,20 +336,20 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("DhcpTimeWifi2")
                         .HasColumnType("text");
 
-                    b.Property<string>("EncryptModeWifi1")
-                        .HasColumnType("text");
+                    b.Property<int>("EncryptModeWifi1")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("EncryptModeWifi2")
-                        .HasColumnType("text");
+                    b.Property<int>("EncryptModeWifi2")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("IsolationWifi1")
-                        .HasColumnType("text");
+                    b.Property<int>("IsolationWifi1")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("IsolationWifi2")
-                        .HasColumnType("text");
+                    b.Property<int>("IsolationWifi2")
+                        .HasColumnType("integer");
 
                     b.Property<string>("MacAddressWifi1")
                         .HasColumnType("text");
@@ -357,11 +369,11 @@ namespace DATN.Infastructure.Migrations
                     b.Property<string>("StaPassword")
                         .HasColumnType("text");
 
-                    b.Property<string>("StaProtocol")
-                        .HasColumnType("text");
+                    b.Property<int>("StaProtocol")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("StaSecurity")
-                        .HasColumnType("text");
+                    b.Property<int>("StaSecurity")
+                        .HasColumnType("integer");
 
                     b.Property<string>("StaSsidExt")
                         .HasColumnType("text");
@@ -375,14 +387,14 @@ namespace DATN.Infastructure.Migrations
                     b.Property<DateTime>("TimingUpdate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("WifiMode")
-                        .HasColumnType("text");
+                    b.Property<int>("WifiMode")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("WifiNat")
-                        .HasColumnType("text");
+                    b.Property<int>("WifiNat")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("WifiOpen")
-                        .HasColumnType("text");
+                    b.Property<int>("WifiOpen")
+                        .HasColumnType("integer");
 
                     b.HasKey("Imei");
 
