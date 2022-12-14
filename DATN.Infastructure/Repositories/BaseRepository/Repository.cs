@@ -100,7 +100,7 @@ namespace DATN.Infastructure.Repositories.BaseRepository
         public async Task<T> BUpdateTPatchImeiAsync(string imei, JsonPatchDocument TModel)
         {
             var entity = await _context.Set<T>().FindAsync(imei);
-
+            entity.TimingUpdate = System.DateTime.Now;
             entity.IsDeleted = false;
             if (entity != null)
             {
