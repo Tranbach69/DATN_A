@@ -20,7 +20,7 @@ namespace DATN.Application.Lte4gHandler.Queries.GetLte4gPaging
     {
         public string Imei { get; set; }
         public int CardStatus { get; set; }
-        public int Apptype { get; set; }
+        public int AppType { get; set; }
         public int AppState { get; set; }
         public int Pin { get; set; }
         public string SimIccid { get; set; }
