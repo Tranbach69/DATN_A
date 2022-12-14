@@ -42,17 +42,20 @@ namespace DATN
 			services.AddControllers().AddNewtonsoftJson();
 			services.RegisterRepositories();
 			services.RegisterRequestHandlers();
-			//services.AddDbContext<ApplicationDbContext>(option =>
-			//{
-			//	option.UseSqlServer(Configuration.GetConnectionString("MyDb"),
-			//		b => b.MigrationsAssembly("DATN.Api"));
-			//});
-			services.AddDbContext<ApplicationDbContext>(options =>
-			   options.UseNpgsql(
-			   Configuration.GetConnectionString("MyDb"),
-			   b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-
-			services.AddHttpContextAccessor()
+            //services.AddDbContext<ApplicationDbContext>(option =>
+            //{
+            //	option.UseSqlServer(Configuration.GetConnectionString("MyDb"),
+            //		b => b.MigrationsAssembly("DATN.Api"));
+            //});
+            services.AddDbContext<ApplicationDbContext>(options =>
+               options.UseNpgsql(
+               Configuration.GetConnectionString("MyDb"),
+               b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //   options.UseSqlServer(
+            //   Configuration.GetConnectionString("MyDb"),
+            //   b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            services.AddHttpContextAccessor()
 					.AddAuthorization()
 					.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 					.AddJwtBearer(options =>

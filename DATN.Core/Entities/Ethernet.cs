@@ -5,6 +5,7 @@ namespace DATN.Core.Entities
 {
 	public class Ethernet : Base
 	{
+		public string Imei { get; set; }
 		public int DriverType { get; set; }
 		public int DriverEn { get; set; }
 		public int BringUpdownEn { get; set; }
