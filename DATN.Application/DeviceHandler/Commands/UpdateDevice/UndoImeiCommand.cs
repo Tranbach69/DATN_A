@@ -15,6 +15,8 @@ namespace DATN.Application.DeviceHandler.Commands.UpdateDevice
     public class UndoImeiCommand : IRequest<BResult>
     {
         public string Imei { get; set; }
+        public int SocketConnection { get; set; }
+
         public string DeviceName { get; set; }
         public float Price { get; set; }
         public string EquipmentShop { get; set; }

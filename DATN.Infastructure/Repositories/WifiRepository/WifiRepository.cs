@@ -35,6 +35,10 @@ namespace DATN.Infastructure.Repositories.WifiRepository
                 return null;
             }       
         }
+        public async Task<int> GetTotalWifiActiveAsync()
+        {
+            return await _context.Set<Wifi>().Where(a => a.IsDeleted == false).Where(a => a.WifiOpen == 1).CountAsync();
+        }
     }
 }
 

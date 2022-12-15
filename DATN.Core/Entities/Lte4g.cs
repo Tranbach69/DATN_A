@@ -4,7 +4,7 @@ namespace DATN.Core.Entities
 {
 	public class Lte4g : Base
 	{
-		public string Imei { get; set; }
+		public new string Imei { get; set; }
 		public int CardStatus { get; set; }
 		public int AppType { get; set; }
 		public int AppState { get; set; }

@@ -2,6 +2,7 @@
 using DATN.Application.Models;
 using DATN.Core.Entities;
 using DATN.Infastructure.Repositories.DeviceRepository;
+using DATN.Infastructure.Repositories.WifiRepository;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace DATN.Application.DeviceHandler.Queries.GetDevicePaging
     public class GetDevicePagingResponse
     {
         public string Imei { get; set; }
+        public int SocketConnection { get; set; }
+
         public string DeviceName { get; set; }
         public float Price { get; set; }
         public string EquipmentShop { get; set; }
@@ -39,21 +42,26 @@ namespace DATN.Application.DeviceHandler.Queries.GetDevicePaging
     {
         private readonly IDeviceRepository _deviceRepository;
 
-        public GetDevicePagingQueryHandler(IDeviceRepository deviceRepository)
+        private readonly IWifiRepository _wifiRepository;
+
+        public GetDevicePagingQueryHandler(IDeviceRepository deviceRepository, IWifiRepository wifiRepository)
         {
             _deviceRepository = deviceRepository;
+            _wifiRepository = wifiRepository;
+
         }
         public async Task<BResult<BPaging<GetDevicePagingResponse>>> Handle(GetDevicePagingQuery request, CancellationToken cancellationToken)
         {
             var entities = await _deviceRepository.BGetPagingAsync(request.Skip, request.PageSize);
             var items = DeviceMapper.Mapper.Map<List<GetDevicePagingResponse>>(entities);
             var total = await _deviceRepository.BGetTotalAsync();
-
+            var totalWifiActive = await _wifiRepository.GetTotalWifiActiveAsync();
             var result = new BPaging<GetDevicePagingResponse>()
             {
                 Items = items,
 
                 TotalItems = total,
+                TotalWifiActive= totalWifiActive
             };
             return BResult<BPaging<GetDevicePagingResponse>>.Success(result);
         }

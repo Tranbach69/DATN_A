@@ -3,15 +3,17 @@ using System;
 using DATN.Infastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DATN.Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221215021352_date12-15-9h14")]
+    partial class date12159h14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,9 +91,6 @@ namespace DATN.Infastructure.Migrations
 
                     b.Property<string>("PurchaseDate")
                         .HasColumnType("text");
-
-                    b.Property<int>("SocketConnection")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("TimingCreate")
                         .HasColumnType("timestamp without time zone");

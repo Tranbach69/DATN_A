@@ -4,12 +4,11 @@ namespace DATN.Core.Entities
 {
 	public class Wifi: Base
 	{
-		public string Imei { get; set; }
+		public new string Imei { get; set; }
 		public int WifiOpen { get; set; }
 		public int WifiMode { get; set; }
 		public int CurrentAp { get; set; }
 		public int WifiNat { get; set; }
-
 		public string SsidWifi1 { get; set; }
 		public int AuthTypeWifi1 { get; set; }
 		public int EncryptModeWifi1 { get; set; }
@@ -45,6 +44,7 @@ namespace DATN.Core.Entities
 		public int StaSecurity { get; set; }
 		public int StaProtocol { get; set; }
 		public string StaPassword { get; set; }
+
 		public Device Device	{ get; set; }
 	}
 }

@@ -79,7 +79,7 @@ namespace DATN.Application.WifiHandler.Queries.GetWifiPaging
             var items = WifiMapper.Mapper.Map<List<GetWifiPagingResponse>>(entities);
             var total = await _wifiRepository.BGetTotalAsync();
 
-            var result = new BPaging<GetWifiPagingResponse>()
+			var result = new BPaging<GetWifiPagingResponse>()
             {
                 Items = items,
 

@@ -4,7 +4,7 @@ namespace DATN.Core.Entities
 {
 	public class Device: Base
 	{
-		public string Imei { get; set; }
+		public int SocketConnection { get; set; }
 		public string DeviceName { get; set; }
 		public float Price { get; set; }
 		public string EquipmentShop { get; set; }

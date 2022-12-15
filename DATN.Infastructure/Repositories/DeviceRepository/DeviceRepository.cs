@@ -39,6 +39,7 @@ namespace DATN.Infastructure.Repositories.DeviceRepository
 		{
 		}
 
+
 		//public async Task<Device> AddDeviceAsync(Device entity)
 		//{
 		//	entity.TimingCreate = System.DateTime.Now;

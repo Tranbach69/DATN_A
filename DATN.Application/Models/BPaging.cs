@@ -10,5 +10,6 @@ namespace DATN.Application.Models
     {
         public IReadOnlyList<T> Items { get; set; }
         public int TotalItems { get; set; }
+        public int TotalWifiActive { get; set; }
     }
 }
