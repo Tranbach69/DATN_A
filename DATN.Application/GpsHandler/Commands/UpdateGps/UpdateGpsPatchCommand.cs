@@ -41,30 +41,40 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 
 		public async Task<BResult> Handle(UpdateGpsPatchCommand request, CancellationToken cancellationToken)
 		{
-			//var entity = GpsMapper.Mapper.Map<Gps>(request);
-			
-			var result=await _gpsRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
-			if (result == null)
-			{
-				return BResult.Failure("không tìm thấy Imei");
-			}
+			var imei = request.Imei;
+			var key = request.RequestPatch.Operations[0].path;
+			var value = request.RequestPatch.Operations[0].value;
+
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
-
-			string s = "0" + JsonConvert.SerializeObject(result);
+			string gpsPackage = "{\"Index\":3,\"Imei\":\"" + imei + "\",\"" + key + "\":\"" + value + "\"}";
 			//---data to send to the server---
-			string textToSend = s;
-
+			string textToSend = gpsPackage;
 			//---create a TCPClient object at the IP and port no.---
 			TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
 			NetworkStream nwStream = client.GetStream();
 			byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
-
 			//---send the text---
 			nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-
+			//---read back the text---
+			byte[] bytesToRead = new byte[client.ReceiveBufferSize];
+			int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
+			var textReciveFromServer = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
+			if (textReciveFromServer == "success")
+			{
+				var result = await _gpsRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
+				if (result == null)
+				{
+					return BResult.Failure("không tìm thấy Imei");
+				}
+				return BResult.Success();
+			}
+			else if (textReciveFromServer == "Decoding JSON has failed")
+			{
+				return BResult.Failure("Decoding JSON has failed");
+			}
 			client.Close();
-			return BResult.Success();
+			return BResult.Failure("Thiết Bị Đang Mất Kết Nối TCP");
 		}
 	}
 }
