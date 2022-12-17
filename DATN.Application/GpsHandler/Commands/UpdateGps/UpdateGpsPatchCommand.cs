@@ -42,12 +42,14 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 		public async Task<BResult> Handle(UpdateGpsPatchCommand request, CancellationToken cancellationToken)
 		{
 			var imei = request.Imei;
-			var key = request.RequestPatch.Operations[0].path;
+			string key = request.RequestPatch.Operations[0].path;
+			string afterKey = char.ToUpper(key.First()) + key.Substring(1).ToLower();
 			var value = request.RequestPatch.Operations[0].value;
 
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
-			string gpsPackage = "{\"Index\":3,\"Imei\":\"" + imei + "\",\"" + key + "\":\"" + value + "\"}";
+			
+			string gpsPackage = "{\"Index\":3,\"Imei\":\"" + imei + "\",\"" + afterKey + "\":\"" + value + "\"}";
 			//---data to send to the server---
 			string textToSend = gpsPackage;
 			//---create a TCPClient object at the IP and port no.---
@@ -56,11 +58,13 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 			byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
 			//---send the text---
 			nwStream.Write(bytesToSend, 0, bytesToSend.Length);
-			//---read back the text---
+	
+
+			// nhan phai hoi tu server
 			byte[] bytesToRead = new byte[client.ReceiveBufferSize];
 			int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
 			var textReciveFromServer = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
-			if (textReciveFromServer == "success")
+			if (textReciveFromServer == "success3")
 			{
 				var result = await _gpsRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 				if (result == null)

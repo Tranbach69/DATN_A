@@ -37,12 +37,13 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
 		public async Task<BResult> Handle(UpdateEthernetPatchCommand request, CancellationToken cancellationToken)
 		{
 			var imei = request.Imei;
-			var key = request.RequestPatch.Operations[0].path;
+			string key = request.RequestPatch.Operations[0].path;
+			string afterKey = char.ToUpper(key.First()) + key.Substring(1).ToLower();
 			var value = request.RequestPatch.Operations[0].value;
 
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
-			string ethernetPackage = "{\"Index\":2,\"Imei\":\"" + imei + "\",\"" + key + "\":\"" + value + "\"}";
+			string ethernetPackage = "{\"Index\":2,\"Imei\":\"" + imei + "\",\"" + afterKey + "\":\"" + value + "\"}";
 			//---data to send to the server---
 			string textToSend = ethernetPackage;
 			//---create a TCPClient object at the IP and port no.---
@@ -55,7 +56,7 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
 			byte[] bytesToRead = new byte[client.ReceiveBufferSize];
 			int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
 			var textReciveFromServer = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
-			if (textReciveFromServer == "success")
+			if (textReciveFromServer == "success2")
 			{
 				var result = await _ethernetRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 				if (result == null)

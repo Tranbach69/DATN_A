@@ -42,12 +42,13 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
 		public async Task<BResult> Handle(UpdateLte4gPatchCommand request, CancellationToken cancellationToken)
 		{
 			var imei = request.Imei;
-			var key = request.RequestPatch.Operations[0].path;
+			string key = request.RequestPatch.Operations[0].path;
+			string afterKey = char.ToUpper(key.First()) + key.Substring(1).ToLower();
 			var value = request.RequestPatch.Operations[0].value;
 
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
-			string lte4gPackage = "{\"Index\":1,\"Imei\":\"" + imei + "\",\"" + key + "\":\"" + value + "\"}";
+			string lte4gPackage = "{\"Index\":1,\"Imei\":\"" + imei + "\",\"" + afterKey + "\":\"" + value + "\"}";
 			//---data to send to the server---
 			string textToSend = lte4gPackage;
 			//---create a TCPClient object at the IP and port no.---
@@ -60,7 +61,7 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
 			byte[] bytesToRead = new byte[client.ReceiveBufferSize];
 			int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
 			var textReciveFromServer = Encoding.ASCII.GetString(bytesToRead, 0, bytesRead);
-			if (textReciveFromServer == "success")
+			if (textReciveFromServer == "success1")
 			{
 				var result = await _lte4gRepository.BUpdateTPatchImeiAsync(request.Imei, request.RequestPatch);
 				if (result == null)
