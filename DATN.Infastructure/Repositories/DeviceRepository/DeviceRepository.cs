@@ -2,6 +2,8 @@
 using DATN.Infastructure.Persistence;
 using DATN.Infastructure.Repositories.BaseRepository;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DATN.Infastructure.Repositories.DeviceRepository
@@ -38,7 +40,19 @@ namespace DATN.Infastructure.Repositories.DeviceRepository
 		public DeviceRepository(ApplicationDbContext context) : base(context)
 		{
 		}
-
+		public async Task<String> ChangePasswordAsync( string email)
+        {
+			const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			var random = new Random();
+            var deviceObject = await _context.Set<Device>().FirstOrDefaultAsync(a => a.Email.Equals(email));
+			if (deviceObject == null) return "không tồn tại Email";
+			var accountObject = await _context.Set<Account>().FirstOrDefaultAsync(a => a.Imei.Equals(deviceObject.Imei));
+			if (accountObject == null) return "không tồn tại Imei";
+			accountObject.Password = new string(Enumerable.Repeat(chars, 8)
+				.Select(s => s[random.Next(s.Length)]).ToArray());
+			await _context.SaveChangesAsync();
+            return accountObject.Password;
+        }
 
 		//public async Task<Device> AddDeviceAsync(Device entity)
 		//{

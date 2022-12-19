@@ -41,7 +41,7 @@ namespace DATN.Application.WifiHandler.Commands.UpdateWifi
 
 		public async Task<BResult> Handle(UpdateWifiPatchCommand request, CancellationToken cancellationToken)
 		{
-
+			var wifiInfo = await _wifiRepository.BGetByImeiAsync(request.Imei);
 			var imei = request.Imei;
 			string key = request.RequestPatch.Operations[0].path;
 			string afterKey = char.ToUpper(key.First()) + key.Substring(1);
@@ -72,7 +72,15 @@ namespace DATN.Application.WifiHandler.Commands.UpdateWifi
             //{
 
             //}
-			wifiPackage = "{\"Index\":0,\"Imei\":\"" + imei + "\",\"" + afterKey + "\":\"" + value + "\"}";
+			if(afterKey == "WifiMode")
+            {
+				wifiPackage = "{\"Imei\":\"" + imei + "\",\"Index\":0,\"" + afterKey + "\":\"" + value + "\"}";
+            }
+            else
+            {
+
+			wifiPackage = "{\"Imei\":\"" + imei + "\",\"Index\":0,\"WifiMode\":\"" + wifiInfo.WifiMode+"\",\"" + afterKey + "\":\"" + value + "\"}";
+            }
 			//---data to send to the server---
 			string textToSend = wifiPackage;
 			//---create a TCPClient object at the IP and port no.---

@@ -49,7 +49,7 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
 			
-			string gpsPackage = "{\"Index\":3,\"Imei\":\"" + imei + "\",\"" + afterKey + "\":\"" + value + "\"}";
+			string gpsPackage = "{\"Imei\":\"" + imei + "\",\"Index\":0,\"" + afterKey + "\":\"" + value + "\"}";
 			//---data to send to the server---
 			string textToSend = gpsPackage;
 			//---create a TCPClient object at the IP and port no.---

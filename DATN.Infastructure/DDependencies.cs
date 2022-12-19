@@ -1,6 +1,7 @@
 ﻿using DATN.Infastructure.Repositories.AccountRepository;
 using DATN.Infastructure.Repositories.BaseRepository;
 using DATN.Infastructure.Repositories.DeviceRepository;
+using DATN.Infastructure.Repositories.EmailRepository;
 using DATN.Infastructure.Repositories.EthernetRepository;
 using DATN.Infastructure.Repositories.GpsRepository;
 using DATN.Infastructure.Repositories.Lte4gRepository;
@@ -20,6 +21,7 @@ namespace DATN.Infastructure
 			services.AddTransient<ILte4gRepository, Lte4gRepository>();
 			services.AddTransient<IGpsRepository, GpsRepository>();
 			services.AddTransient<IAccountRepository, AccountRepository>();
+			services.AddTransient<IEmailService, EmailService>();
 			//services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 		}
 	}

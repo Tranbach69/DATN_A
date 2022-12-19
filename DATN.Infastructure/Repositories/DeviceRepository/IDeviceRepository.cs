@@ -12,5 +12,6 @@ namespace DATN.Infastructure.Repositories.DeviceRepository
 	{
 		//Task<Device> AddDeviceAsync(Device entity);
 		//Task<Device> UpdateDeviceAsync(Device entity);
+		Task<String> ChangePasswordAsync(string email);
 	}
 }

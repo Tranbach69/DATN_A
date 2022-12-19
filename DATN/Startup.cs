@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using DATN.Application.Middleware;
+using static DATN.Infastructure.Repositories.EmailRepository.EmailService;
 
 namespace DATN
 {
@@ -37,6 +38,10 @@ namespace DATN
 		{
 			services.AddAutoMapper(typeof(Startup));
 
+
+
+			// mail
+			services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 			// Register the MediatR request handlers
 			services.AddCors();
 			services.AddControllers().AddNewtonsoftJson();
