@@ -48,7 +48,7 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
 
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
-			string lte4gPackage = "{\"Imei\":\"" + imei + "\",\"Index\":0,\"" + afterKey + "\":\"" + value + "\"}";
+			string lte4gPackage = "{\"Imei\":\"" + imei + "\",\"Index\":1,\"" + afterKey + "\":\"" + value + "\"}";
 			//---data to send to the server---
 			string textToSend = lte4gPackage;
 			//---create a TCPClient object at the IP and port no.---

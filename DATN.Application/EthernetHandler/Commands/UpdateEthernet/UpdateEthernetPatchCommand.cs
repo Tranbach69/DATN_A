@@ -43,7 +43,7 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
 
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
-			string ethernetPackage = "{\"Imei\":\"" + imei + "\",\"Index\":0,\"" + afterKey + "\":\"" + value + "\"}";
+			string ethernetPackage = "{\"Imei\":\"" + imei + "\",\"Index\":2,\"" + afterKey + "\":\"" + value + "\"}";
 			//---data to send to the server---
 			string textToSend = ethernetPackage;
 			//---create a TCPClient object at the IP and port no.---
