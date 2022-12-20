@@ -42,7 +42,7 @@ namespace DATN.Infastructure.Repositories.AccountRepository
             entity.TimingCreate = System.DateTime.Now;
             entity.IsDeleted = false;
 			var a = await _context.Set<Account>().FirstOrDefaultAsync(a => a.Imei.Equals(entity.Imei));
-
+            
             if (a != null) {
                 if (entity.Role < 2 && entity.Imei=="")
                 {

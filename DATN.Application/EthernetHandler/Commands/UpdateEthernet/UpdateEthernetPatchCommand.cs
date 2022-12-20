@@ -40,10 +40,23 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
 			string key = request.RequestPatch.Operations[0].path;
 			string afterKey = char.ToUpper(key.First()) + key.Substring(1).ToLower();
 			var value = request.RequestPatch.Operations[0].value;
-
+			string ethernetPackage;
 			const int PORT_NO = 3023;
 			const string SERVER_IP = "localhost";
-			string ethernetPackage = "{\"Imei\":\"" + imei + "\",\"Index\":2,\"" + afterKey + "\":\"" + value + "\"}";
+			if(afterKey== "IpAddr"||afterKey== "Netmask")
+            {
+				var ethernetInfo = await _ethernetRepository.BGetByImeiAsync(request.Imei);
+				if(afterKey == "IpAddr")
+                {
+					ethernetPackage = "{\"Imei\":\"" + imei + "\",\"Index\":2,\"" + afterKey + "\":\"" + value + "\",\"Netmask\":\"" + ethernetInfo.Netmask + "\"}";
+                }
+                else
+                {
+					ethernetPackage = "{\"Imei\":\"" + imei + "\",\"Index\":2,\"" + afterKey + "\":\"" + value + "\",\"IpAddr\":\"" + ethernetInfo.IpAddr + "\"}";
+				}
+			}
+			else
+			 ethernetPackage = "{\"Imei\":\"" + imei + "\",\"Index\":2,\"" + afterKey + "\":\"" + value + "\"}";
 			//---data to send to the server---
 			string textToSend = ethernetPackage;
 			//---create a TCPClient object at the IP and port no.---
