@@ -45,6 +45,7 @@ namespace DATN.Application.AccountHandler.Queries.GetAccountByImei
         {
             var entity = await _accountRepository.BGetByImeiAsync(request.Imei);
             var result = AccountMapper.Mapper.Map<GetAccountByImeiResponse>(entity);
+            
             return result;
 
         }

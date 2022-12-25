@@ -20,5 +20,6 @@ namespace DATN.Infastructure.Repositories.AccountRepository
 		Task DeleteAccountByIdAsync(int id);
 		Task UpdateAccountPatchAsync(int id, JsonPatchDocument TModel);
 		Task<Account> GetAccountByIdAsync(int id);
+		Task<Account> GetAccountByImeiAsync(string imei);
 	}
 }

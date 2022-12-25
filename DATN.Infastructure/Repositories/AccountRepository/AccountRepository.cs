@@ -109,6 +109,16 @@ namespace DATN.Infastructure.Repositories.AccountRepository
             }
             return entity;
         }
+        public async Task<Account> GetAccountByImeiAsync(string imei)
+        {
+            var entity = await _context.Set<Account>().FirstOrDefaultAsync(t => t.Id.Equals(imei));
+            _context.Entry(entity).State = EntityState.Detached;
+            if (entity?.IsDeleted == true)
+            {
+                return null;
+            }
+            return entity;
+        }
     }
 
 }
