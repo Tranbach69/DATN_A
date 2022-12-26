@@ -43,7 +43,7 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
 		{
 			var imei = request.Imei;
 			string key = request.RequestPatch.Operations[0].path;
-			string afterKey = char.ToUpper(key.First()) + key.Substring(1).ToLower();
+			string afterKey = char.ToUpper(key.First()) + key.Substring(1);
 			var value = request.RequestPatch.Operations[0].value;
 
 			const int PORT_NO = 3023;
