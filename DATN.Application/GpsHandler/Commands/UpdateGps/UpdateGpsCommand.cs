@@ -50,22 +50,22 @@ namespace DATN.Application.GpsHandler.Commands.UpdateGps
                 else return BResult.Failure("Imei không tồn tại");
 
             }
-            const int PORT_NO = 3023;
-            const string SERVER_IP = "localhost";
+            //const int PORT_NO = 3023;
+            //const string SERVER_IP = "localhost";
 
-            string s = "3"+JsonConvert.SerializeObject(request);
-            //---data to send to the server---
-            string textToSend = s;
+            //string s = "3"+JsonConvert.SerializeObject(request);
+            ////---data to send to the server---
+            //string textToSend = s;
 
-            //---create a TCPClient object at the IP and port no.---
-            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
-            NetworkStream nwStream = client.GetStream();
-            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
+            ////---create a TCPClient object at the IP and port no.---
+            //TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
+            //NetworkStream nwStream = client.GetStream();
+            //byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
 
-            //---send the text---
-            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+            ////---send the text---
+            //nwStream.Write(bytesToSend, 0, bytesToSend.Length);
 
-            client.Close();
+            //client.Close();
             return BResult.Success();
         }
     }

@@ -50,22 +50,22 @@ namespace DATN.Application.EthernetHandler.Commands.UpdateEthernet
                 else return BResult.Failure("Imei không tồn tại");
 
             }
-            const int PORT_NO = 3023;
-            const string SERVER_IP = "localhost";
+            //const int PORT_NO = 3023;
+            //const string SERVER_IP = "localhost";
 
-            string s =  "2"+ JsonConvert.SerializeObject(request);
+            //string s =  "2"+ JsonConvert.SerializeObject(request);
 
-            string textToSend = s;
-
- 
-            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
-            NetworkStream nwStream = client.GetStream();
-            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
+            //string textToSend = s;
 
  
-            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+            //TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
+            //NetworkStream nwStream = client.GetStream();
+            //byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
 
-            client.Close();
+ 
+            //nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+
+            //client.Close();
             return BResult.Success();
         }
     }

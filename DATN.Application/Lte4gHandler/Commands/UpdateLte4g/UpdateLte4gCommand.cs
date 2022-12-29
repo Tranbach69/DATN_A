@@ -58,27 +58,27 @@ namespace DATN.Application.Lte4gHandler.Commands.UpdateLte4g
                 else return BResult.Failure("Imei không tồn tại");
 
             }
-            const int PORT_NO = 3023;
-            const string SERVER_IP = "localhost";
+            //const int PORT_NO = 3023;
+            //const string SERVER_IP = "localhost";
 
-            string s = "1"+JsonConvert.SerializeObject(request);
-            //---data to send to the server---
-            string textToSend = s;
+            //string s = "1"+JsonConvert.SerializeObject(request);
+            ////---data to send to the server---
+            //string textToSend = s;
 
-            //---create a TCPClient object at the IP and port no.---
-            TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
-            NetworkStream nwStream = client.GetStream();
-            byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
+            ////---create a TCPClient object at the IP and port no.---
+            //TcpClient client = new TcpClient(SERVER_IP, PORT_NO);
+            //NetworkStream nwStream = client.GetStream();
+            //byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(textToSend);
 
-            //---send the text---
-            nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+            ////---send the text---
+            //nwStream.Write(bytesToSend, 0, bytesToSend.Length);
 
-            ////---read back the text---
-            //byte[] bytesToRead = new byte[client.ReceiveBufferSize];
-            //int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
-            //Console.WriteLine("Received : " + Encoding.ASCII.GetString(bytesToRead, 0, bytesRead));
-            //Console.ReadLine();
-            client.Close();
+            //////---read back the text---
+            ////byte[] bytesToRead = new byte[client.ReceiveBufferSize];
+            ////int bytesRead = nwStream.Read(bytesToRead, 0, client.ReceiveBufferSize);
+            ////Console.WriteLine("Received : " + Encoding.ASCII.GetString(bytesToRead, 0, bytesRead));
+            ////Console.ReadLine();
+            //client.Close();
             return BResult.Success();
         }
     }

@@ -21,6 +21,7 @@ namespace DATN
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
 					webBuilder.UseStartup<Startup>();
+					//webBuilder.UseUrls("https://10.6.71.64:5001");
 				});
 	}
 }
