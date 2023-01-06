@@ -22,7 +22,7 @@ namespace DATN.Api.Controllers
         public async Task<IActionResult> GetFileById()
         {
             string path = "C:/Users/TranBach/Downloads/mFWA.mp4";
-       
+            //string path = "C:/mFWA/mFWA.mp4";
 
             if (System.IO.File.Exists(path))
             {

@@ -4,7 +4,6 @@ namespace DATN.Core.Entities
 {
 	public class Wifi: Base
 	{
-		public new string Imei { get; set; }
 		public int WifiOpen { get; set; }
 		public int WifiMode { get; set; }
 		public int CurrentAp { get; set; }
