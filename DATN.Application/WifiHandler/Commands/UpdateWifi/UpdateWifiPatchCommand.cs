@@ -175,6 +175,10 @@ namespace DATN.Application.WifiHandler.Commands.UpdateWifi
 			{
 				return BResult.Failure("Decoding JSON has failed");
 			}
+			else if (textReciveFromServer == "failure99")
+			{
+				return BResult.Failure("Thiết Bị Đang được cấu hình bởi người khác");
+			}
 			client.Close();
 			return BResult.Failure("Thiết Bị Đang Mất Kết Nối TCP");
 		}

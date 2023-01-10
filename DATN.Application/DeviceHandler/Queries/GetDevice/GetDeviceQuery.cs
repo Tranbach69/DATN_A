@@ -35,6 +35,8 @@ namespace DATN.Application.DeviceHandler.Queries.GetDevice
         public string OwnerName { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
+        public string UpTime { get; set; }
+        public string ActiveTime { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime TimingCreate { get; set; }
         public DateTime TimingUpdate { get; set; }

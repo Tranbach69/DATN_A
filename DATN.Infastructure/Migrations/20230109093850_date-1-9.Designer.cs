@@ -3,15 +3,17 @@ using System;
 using DATN.Infastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DATN.Infastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230109093850_date-1-9")]
+    partial class date19
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +60,6 @@ namespace DATN.Infastructure.Migrations
             modelBuilder.Entity("DATN.Core.Entities.Device", b =>
                 {
                     b.Property<string>("Imei")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ActiveTime")
                         .HasColumnType("text");
 
                     b.Property<string>("Address")
